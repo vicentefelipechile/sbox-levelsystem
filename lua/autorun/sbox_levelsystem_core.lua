@@ -11,6 +11,9 @@ CreateConVar("sbox_ls_chats", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of
 CreateConvar("sbox_ls_physgun", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses the physgun.")
 CreateConVar("sbox_ls_noclip", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses noclip.")
 
+CreateClientConVar("sbox_ls_notify", "1", true, true, "Should the player be notified when they level up?")
+CreateClientConvar("sbox_ls_notify_sound", "1", true, true, "Should the player be notified with a sound when they level up?")
+CreateClientConvar("sbox_ls_notify_chat", "0", true, true, "Should the player be notified with a chat message when they level up?")
 
 if SERVER and not sql.TableExists("sbox_levelsystem") then
     sql.Query([[CREATE TABLE IF NOT EXISTS sbox_levelsystem (
