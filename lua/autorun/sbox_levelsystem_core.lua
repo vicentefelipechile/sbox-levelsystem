@@ -7,6 +7,7 @@ CreateConVar("sbox_ls_kills", "15", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount o
 CreateConVar("sbox_ls_deaths", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player dies.")
 CreateConVar("sbox_ls_chats", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player talks.")
 CreateConvar("sbox_ls_physgun", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses the physgun.")
+CreateConVar("sbox_ls_noclip", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses noclip.")
 
 
 if SERVER and not sql.TableExists("sbox_levelsystem") then
@@ -17,6 +18,19 @@ if SERVER and not sql.TableExists("sbox_levelsystem") then
         level INTEGER NOT NULL DEFAULT 1,
         xp INTEGER NOT NULL DEFAULT 0,
     )]])
+end
+
+----------------------------------
+------------ Functions -----------
+----------------------------------
+function SLS_getLevelPlayer(ply)
+    local data = sql.Query("SELECT level FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")
+    return tonumber(data[1]["level"])
+end
+
+function SLS_getLevelExp(level)
+    local xp = sbox_ls["levels"][level]
+    return xp
 end
 
 local function AddFile(file, dir)
