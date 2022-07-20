@@ -113,7 +113,7 @@ end)
 ----------------------------------
 ------------- Noclip -------------
 ----------------------------------
-hook.Add("PlayerNoclip", "SboxLS_Noclip", function(ply)
+hook.Add("PlayerNoClip", "SboxLS_Noclip", function(ply)
     checkPlayerDatabase(ply)
     local xp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_noclip
     local xp_total = SLS_getLevelExp(SLS_getLevelPlayer(ply))
