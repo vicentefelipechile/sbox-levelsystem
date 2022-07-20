@@ -1,7 +1,7 @@
 local function checkPlayerDatabase(ply)
 	local data = sql.Query("SELECT * FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")
-	if data then
-        sql.Query("INSERT INTO sbox_levelsystem (player, plyname, level, xp) VALUES (" .. ply:SteamID64() .. ", '" .. ply:Name() .. "', 1, 0);")
+	if not data then
+        sql.Query("INSERT INTO sbox_levelsystem (player, plyname) VALUES (" .. ply:SteamID64() .. ", " .. sql.SQLStr(ply:Name()) .. ");")
     end
 end
 
@@ -20,7 +20,7 @@ local xp_noclip = GetConVar("sbox_ls_noclip"):GetInt()
 ----------------------------------
 hook.Add("PlayerInitialSpawn", "SboxLS_connection", function(ply)
 	checkPlayerDatabase(ply)
-    local xp = tonumber(sql.QueryValue("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_connections
+    local xp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_connections
     local xp_total = SLS_getLevelExp(SLS_getLevelPlayer(ply))
 
     if xp > xp_total then
@@ -43,7 +43,7 @@ end)
 ----------------------------------
 hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
 	checkPlayerDatabase(victim)
-    local Vxp = tonumber(sql.QueryValue("SELECT xp FROM sbox_levelsystem WHERE player = " .. victim:SteamID64() .. ";")[1]["xp"]) + xp_deaths
+    local Vxp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. victim:SteamID64() .. ";")[1]["xp"]) + xp_deaths
     local Vxp_total = SLS_getLevelExp(SLS_getLevelPlayer(victim))
 
     if Vxp > Vxp_total then
@@ -56,7 +56,7 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
     victim:SetNWInt("sbox_levelsystem_xp", xp)
 
 	if inflictor:IsPlayer() and (victim ~= attacker) then
-        local Axp = tonumber(sql.QueryValue("SELECT xp FROM sbox_levelsystem WHERE player = " .. attacker:SteamID64() .. ";")[1]["xp"]) + xp_kills
+        local Axp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. attacker:SteamID64() .. ";")[1]["xp"]) + xp_kills
         local Axp_total = SLS_getLevelExp(SLS_getLevelPlayer(attacker))
         
         if Axp > Axp_total then
@@ -77,7 +77,7 @@ end)
 ----------------------------------
 hook.Add("PlayerSay", "SboxLS_Chat", function(plyname)
     checkPlayerDatabase(ply)
-    local xp = tonumber(sql.QueryValue("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_chats
+    local xp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_chats
     local xp_total = SLS_getLevelExp(SLS_getLevelPlayer(ply))
 
     if xp > xp_total then
@@ -96,7 +96,7 @@ end)
 ----------------------------------
 hook.Add("PhysgunPickup", "SboxLS_Physgun", function(ply)
     checkPlayerDatabase(ply)
-    local xp = tonumber(sql.QueryValue("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_physgun
+    local xp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_physgun
     local xp_total = SLS_getLevelExp(SLS_getLevelPlayer(ply))
 
     if xp > xp_total then
@@ -115,7 +115,7 @@ end)
 ----------------------------------
 hook.Add("PlayerNoclip", "SboxLS_Noclip", function(ply)
     checkPlayerDatabase(ply)
-    local xp = tonumber(sql.QueryValue("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_noclip
+    local xp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_noclip
     local xp_total = SLS_getLevelExp(SLS_getLevelPlayer(ply))
 
     if xp > xp_total then
