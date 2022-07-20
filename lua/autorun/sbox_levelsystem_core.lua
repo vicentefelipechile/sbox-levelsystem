@@ -23,7 +23,7 @@ if SERVER and not sql.TableExists("sbox_levelsystem") then
         player INTEGER NOT NULL,
         plyname VARCHAR(255) NOT NULL,
         level INTEGER NOT NULL DEFAULT 1,
-        xp INTEGER NOT NULL DEFAULT 0,
+        xp INTEGER NOT NULL DEFAULT 0
     )]])
 end
 
