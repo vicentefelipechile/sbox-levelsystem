@@ -31,6 +31,7 @@ hook.Add("PlayerInitialSpawn", "SboxLS_connection", function(ply)
     end
     sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. ply:SteamID64() .. ";")
 
+    ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
     ply:SetNWInt("sbox_levelsystem_xp", xp)
 
 	sql.Query("UPDATE sbox_levelsystem SET plyname = " .. sql.SQLStr(ply:Name()) .. " WHERE player = " .. ply:SteamID64() .. ";")
@@ -53,6 +54,7 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
     end
     sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. victim:SteamID64() .. ";")
 
+    victim:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
     victim:SetNWInt("sbox_levelsystem_xp", xp)
 
 	if inflictor:IsPlayer() and (victim ~= attacker) then
@@ -64,7 +66,8 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
             xp = 0
         end
         sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. attacker:SteamID64() .. ";")
-    
+
+        attacker:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
         attacker:SetNWInt("sbox_levelsystem_xp", xp)
 	end
 
@@ -85,6 +88,7 @@ hook.Add("PlayerSay", "SboxLS_Chat", function(plyname)
     end
     sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. ply:SteamID64() .. ";")
 
+    ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
     ply:SetNWInt("sbox_levelsystem_xp", xp)
     return
 end)
@@ -103,6 +107,7 @@ hook.Add("PhysgunPickup", "SboxLS_Physgun", function(ply)
     end
     sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. ply:SteamID64() .. ";")
 
+    ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
     ply:SetNWInt("sbox_levelsystem_xp", xp)
     return
 end)
@@ -121,6 +126,7 @@ hook.Add("PlayerNoclip", "SboxLS_Noclip", function(ply)
     end
     sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. ply:SteamID64() .. ";")
 
+    ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
     ply:SetNWInt("sbox_levelsystem_xp", xp)
     return
 end)
