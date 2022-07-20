@@ -30,7 +30,7 @@ hook.Add("PlayerInitialSpawn", "SboxLS_connection", function(ply)
     sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. ply:SteamID64() .. ";")
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-    ply:SetNWInt("sbox_levelsystem_xp", xp)
+    ply:SetNWInt("sbox_ls_xp", xp)
 
 	sql.Query("UPDATE sbox_levelsystem SET plyname = " .. sql.SQLStr(ply:Name()) .. " WHERE player = " .. ply:SteamID64() .. ";")
 
@@ -53,7 +53,7 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
     sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. victim:SteamID64() .. ";")
 
     victim:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-    victim:SetNWInt("sbox_levelsystem_xp", xp)
+    victim:SetNWInt("sbox_ls_xp", xp)
 
 	if inflictor:IsPlayer() and (victim ~= attacker) then
         local Axp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. attacker:SteamID64() .. ";")[1]["xp"]) + xp_kills
@@ -66,7 +66,7 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
         sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. attacker:SteamID64() .. ";")
 
         attacker:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-        attacker:SetNWInt("sbox_levelsystem_xp", xp)
+        attacker:SetNWInt("sbox_ls_xp", xp)
 	end
 
 	return
@@ -87,7 +87,7 @@ hook.Add("PlayerSay", "SboxLS_Chat", function(plyname)
     sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. ply:SteamID64() .. ";")
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-    ply:SetNWInt("sbox_levelsystem_xp", xp)
+    ply:SetNWInt("sbox_ls_xp", xp)
     return
 end)
 
@@ -106,7 +106,7 @@ hook.Add("PhysgunPickup", "SboxLS_Physgun", function(ply)
     sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. ply:SteamID64() .. ";")
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-    ply:SetNWInt("sbox_levelsystem_xp", xp)
+    ply:SetNWInt("sbox_ls_xp", xp)
     return
 end)
 
@@ -125,6 +125,6 @@ hook.Add("PlayerNoClip", "SboxLS_Noclip", function(ply)
     sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. ply:SteamID64() .. ";")
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-    ply:SetNWInt("sbox_levelsystem_xp", xp)
+    ply:SetNWInt("sbox_ls_xp", xp)
     return
 end)
