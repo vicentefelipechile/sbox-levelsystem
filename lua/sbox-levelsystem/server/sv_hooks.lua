@@ -1,7 +1,7 @@
 local function checkPlayerDatabase(ply)
 	local data = sql.Query("SELECT * FROM sbox_levelsystem WHERE player = " .. sql.SQLStr(ply:SteamID64()) .. ";")
 	if not data then
-        sql.Query("INSERT INTO sbox_levelsystem (player, plyname) VALUES (" .. sql.SQLStr(ply:SteamID64()) .. ", " .. ply:Name() .. ");")
+        sql.Query("INSERT INTO sbox_levelsystem (player, plyname) VALUES (" .. sql.SQLStr(ply:SteamID64()) .. ", " .. sql.SQLStr(ply:Name()) .. ");")
     end
 end
 
