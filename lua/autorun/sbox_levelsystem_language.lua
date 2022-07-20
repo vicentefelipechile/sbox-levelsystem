@@ -12,7 +12,9 @@ function SLS_GetLanguage(phrase)
     return stats.language[language][phrase] or phrase
 end
 
+--[[
 function SLS_Size(size)
     local language = lang_table[lang:GetString()] or "english"
     return stats.menu_size[language][size] or size
 end
+--]]
