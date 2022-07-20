@@ -13,7 +13,7 @@ CreateConVar("sbox_ls_noclip", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount o
 
 
 if SERVER and not sql.TableExists("sbox_levelsystem") then
-    sql.Query([[CREATE TABLE IF NOT EXISTS stats_mp (
+    sql.Query([[CREATE TABLE IF NOT EXISTS sbox_levelsystem (
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         player INTEGER NOT NULL,
         plyname VARCHAR(255) NOT NULL,
