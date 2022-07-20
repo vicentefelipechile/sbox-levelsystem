@@ -7,7 +7,7 @@ local function checkPlayerDatabase(ply)
     end
 end
 
-local function getPlayerLevel(ply)
+local function getLevelPlayer(ply)
     local data = sql.Query("SELECT level FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")
     return tonumber(data[1]["level"])
 end
@@ -20,22 +20,25 @@ end
 ----------------------------------
 ------------- Values -------------
 ----------------------------------
-
-
+local xp_deaths = GetConVar("sbox_ls_deaths"):GetInt()
+local xp_kills = GetConVar("sbox_ls_kills"):GetInt()
+local xp_chats = GetConVar("sbox_ls_chats"):GetInt()
+local xp_physgun = GetConVar("sbox_ls_physgun"):GetInt()
+local xp_connections = GetConVar("sbox_ls_connections"):GetInt()
 
 ----------------------------------
 ----------- Connection -----------
 ----------------------------------
 hook.Add("PlayerInitialSpawn", "SboxLS_connection", function(ply)
 	checkPlayerDatabase(ply)
-    xp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"])
-    xp_total = getLevelExp(getPlayerLevel(ply))
+    xp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_connections
+    xp_total = getLevelExp(getLevelPlayer(ply))
 
-    sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp[1]["xp"] + 15 .. " WHERE player = " .. ply:SteamID64() .. ";")
     if xp > xp_total then
-        sql.Query("UPDATE sbox_levelsystem SET level = " .. sql.SQLStr(getPlayerLevel(ply) + 1) .. ", xp = 0 WHERE player = " .. ply:SteamID64() .. ";")
+        sql.Query("UPDATE sbox_levelsystem SET level = " .. sql.SQLStr(getLevelPlayer(ply) + 1) .. ", xp = 0 WHERE player = " .. ply:SteamID64() .. ";")
         xp = 0
     end
+    sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. ply:SteamID64() .. ";")
 
     ply:SetNWInt("sbox_levelsystem_xp", xp)
 
