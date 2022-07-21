@@ -16,5 +16,5 @@ hook.Add("PlayerSay", "SboxLS_commands", function(ply)
         return ""
     end
 
-    return
+    return text
 end)
