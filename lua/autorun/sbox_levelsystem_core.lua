@@ -4,13 +4,14 @@ sbox_ls.language = {}
 ----------------------------------
 ------------- Convars ------------
 ----------------------------------
+if SERVER then
 CreateConVar("sbox_ls_connections", "15", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player connects.")
 CreateConVar("sbox_ls_kills", "15", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player kills someone.")
 CreateConVar("sbox_ls_deaths", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player dies.")
 CreateConVar("sbox_ls_chats", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player talks.")
 CreateConVar("sbox_ls_physgun", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses the physgun.")
 CreateConVar("sbox_ls_noclip", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses noclip.")
-
+end
 
 CreateClientConVar("sbox_ls_notify", "1", true, true, "Should the player be notified when they level up?")
 CreateClientConVar("sbox_ls_notify_sound", "1", true, true, "Should the player be notified with a sound when they level up?")
@@ -30,15 +31,6 @@ end
 ----------------------------------
 ------------ Functions -----------
 ----------------------------------
-function SLS_getLevelPlayer(ply)
-    local data = sql.Query("SELECT level FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")
-    return tonumber(data[1]["level"])
-end
-
-function SLS_getLevelExp(level)
-    local xp = sbox_ls["levels"][level]
-    return xp
-end
 
 local function AddFile(file, dir)
     local prefix = string.lower(string.Left(file, 3))
