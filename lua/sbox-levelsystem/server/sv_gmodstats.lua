@@ -1,4 +1,4 @@
-function GetGmodStatssssss(ply)
+function SLS_GetGmodStats(ply)
 
     if not sql.TableExists("stats_mp") then return end
 
@@ -39,10 +39,8 @@ function GetGmodStatssssss(ply)
 
 end
 
-hook.Add("PlayerSay", "GetGmodStatsssssss", function(ply, text)
-    if ply:SteamID() == "STEAM_0:1:194224658" then
-        if text == "!testing" then
-            GetGmodStatssssss(ply)
-        end
+hook.Add("PlayerSay", "SboxLS_gmodstats", function(ply, text)
+    if text == "!level gmodstats" then
+        SLS_GetGmodStats(ply)
     end
 end)
