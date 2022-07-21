@@ -48,12 +48,12 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
 
     if Vxp > Vxp_total then
         sql.Query("UPDATE sbox_levelsystem SET level = " .. sql.SQLStr(SLS_getLevelPlayer(victim) + 1) .. ", xp = 0 WHERE player = " .. victim:SteamID64() .. ";")
-        xp = 0
+        Vxp = 0
     end
-    sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. victim:SteamID64() .. ";")
+    sql.Query("UPDATE sbox_levelsystem SET xp = " .. Vxp .. " WHERE player = " .. victim:SteamID64() .. ";")
 
     victim:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-    victim:SetNWInt("sbox_ls_xp", xp)
+    victim:SetNWInt("sbox_ls_xp", Vxp)
 
 	if inflictor:IsPlayer() and (victim ~= attacker) then
         local Axp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. attacker:SteamID64() .. ";")[1]["xp"]) + xp_kills
@@ -61,12 +61,12 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
         
         if Axp > Axp_total then
             sql.Query("UPDATE sbox_levelsystem SET level = " .. sql.SQLStr(SLS_getLevelPlayer(attacker) + 1) .. ", xp = 0 WHERE player = " .. attacker:SteamID64() .. ";")
-            xp = 0
+            Axp = 0
         end
-        sql.Query("UPDATE sbox_levelsystem SET xp = " .. xp .. " WHERE player = " .. attacker:SteamID64() .. ";")
+        sql.Query("UPDATE sbox_levelsystem SET xp = " .. Axp .. " WHERE player = " .. attacker:SteamID64() .. ";")
 
         attacker:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-        attacker:SetNWInt("sbox_ls_xp", xp)
+        attacker:SetNWInt("sbox_ls_xp", Axp)
 	end
 
 	return
