@@ -11,10 +11,3 @@ function SLS_GetLanguage(phrase)
     local language = lang_table[lang:GetString()] or "english"
     return sbox_ls.language[language][phrase] or phrase
 end
-
---[[
-function SLS_Size(size)
-    local language = lang_table[lang:GetString()] or "english"
-    return sbox_ls.language[language][size] or size
-end
---]]
