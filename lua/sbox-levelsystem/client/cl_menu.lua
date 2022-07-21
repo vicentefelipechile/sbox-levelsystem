@@ -9,7 +9,7 @@ net.Receive("sbox_levelsystem_net", function()
     ------------- Windows ------------
     ----------------------------------
     local sFrame = vgui.Create("DFrame")
-    sFrame:SetTitle("Sanbox Level System")
+    sFrame:SetTitle("Sandbox Level System")
     sFrame:SetSize(300, 200)
     sFrame:Center()
     sFrame:MakePopup()
