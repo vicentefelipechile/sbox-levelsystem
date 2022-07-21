@@ -75,7 +75,7 @@ end)
 ----------------------------------
 -------------- Chats -------------
 ----------------------------------
-hook.Add("PlayerSay", "SboxLS_Chat", function(plyname)
+hook.Add("PlayerSay", "SboxLS_Chat", function(ply)
     checkPlayerDatabase(ply)
     local xp = tonumber(sql.Query("SELECT xp FROM sbox_levelsystem WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_chats
     local xp_total = SLS_getLevelExp(SLS_getLevelPlayer(ply))
