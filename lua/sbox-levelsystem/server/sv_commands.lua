@@ -1,16 +1,15 @@
-util.AddNetworkString("sbox_levelsystem")
-hook.Add("PlayerSay", "SboxLS_commands", function(ply)
+util.AddNetworkString("sbox_levelsystem_net")
+hook.Add("PlayerSay", "SboxLS_commands", function(ply, text)
 
     if string.lower(text) == "!level" then
 
-        local level = ply:GetNWInt("level")
-        local xp = ply:GetNWInt("xp")
+        local stats = sql.Query("SELECT * FROM sbox_levelsystem WHERE player = " .. sql.SQLStr(ply:SteamID64()) .. ";")
         
-        net.Start("sbox_levelsystem")
-            net.WriteString("level")
-            net.WriteInt(level, 32)
-            net.WriteString("xp")
-            net.WriteInt(xp, 32)
+        net.Start("sbox_levelsystem_net")
+            net.WriteTable({
+                level = stats[1]["level"],
+                xp = stats[1]["xp"]
+            })
         net.Send(ply)
         
         return ""
