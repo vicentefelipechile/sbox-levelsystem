@@ -52,7 +52,7 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
     end
     sql.Query("UPDATE sbox_levelsystem SET xp = " .. Vxp .. " WHERE player = " .. victim:SteamID64() .. ";")
 
-    victim:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
+    victim:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(victim))
     victim:SetNWInt("sbox_ls_xp", Vxp)
 
 	if inflictor:IsPlayer() and (victim ~= attacker) then
@@ -65,7 +65,7 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
         end
         sql.Query("UPDATE sbox_levelsystem SET xp = " .. Axp .. " WHERE player = " .. attacker:SteamID64() .. ";")
 
-        attacker:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
+        attacker:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(attacker))
         attacker:SetNWInt("sbox_ls_xp", Axp)
 	end
 
