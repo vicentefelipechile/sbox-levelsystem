@@ -25,6 +25,11 @@ end
 function SLS_levelUpPlayer(ply, xp_type)
     local xp = tonumber(sql.Query("SELECT xp FROM " .. sbox_ls.db .. " WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_type
     local xp_total = SLS_getLevelExp(SLS_getLevelPlayer(ply))
+    local level = SLS_getLevelPlayer(ply)
+
+    if level == #sbox_ls["levels"] then
+        sql.Query("UPDATE " .. sbox_ls.db .. " SET level = " .. #sbox_ls["levels"] .. ", xp " .. sql.SQLStr(xp-xp_total) .. " WHERE player = " .. ply:SteamID64() .. ";")
+    end
 
     if xp > xp_total then
         sql.Query("UPDATE " .. sbox_ls.db .. " SET level = " .. sql.SQLStr(SLS_getLevelPlayer(ply) + 1) .. ", xp = 0 WHERE player = " .. ply:SteamID64() .. ";")

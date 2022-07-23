@@ -1,4 +1,4 @@
-function SLS_GetGmodStats(ply)
+local function SLS_GetGmodStats(ply)
 
     if not sql.TableExists("stats_mp") then return end
 
@@ -12,7 +12,7 @@ function SLS_GetGmodStats(ply)
     local xp_kills = tonumber(stats[1]["kill"]) * GetConVar("sbox_ls_kills"):GetInt()
     local xp_chat = tonumber(stats[1]["chat"]) * GetConVar("sbox_ls_chats"):GetInt()
     local xp_total = 0
-    for k, v in pairs(sbox_ls["levels"]) do
+    for k, v in ipairs(sbox_ls["levels"]) do
         xp_total = xp_total + v
     end
 
@@ -25,9 +25,6 @@ function SLS_GetGmodStats(ply)
         xp_total = xp_total + v
     end
 
-    -- verificar cada nivel si "xp" es mayor que el valor de cada nivel (sbox_ls["levels"][i])
-    -- si es mayor, restar el valor de "xp" por el valor de cada nivel (sbox_ls["levels"][i])
-    -- y sumar 1 al "level"
     for i = 1, #sbox_ls["levels"] do
         if xp >= sbox_ls["levels"][i] then
             xp = xp - sbox_ls["levels"][i]
@@ -35,7 +32,12 @@ function SLS_GetGmodStats(ply)
         end
     end
 
-    sql.Query("UPDATE sbox_levelsystem SET level = " .. SQLStr(level) .. ", xp = " .. SQLStr(xp) .. " WHERE player = " .. id .. ";")
+    if level > #sbox_ls["levels"] then
+        level = tonumber(#sbox_ls["levels"])
+        xp = math.random(1, 120)
+    end
+
+    sql.Query("UPDATE " .. sbox_ls.db .. " SET level = " .. SQLStr(level) .. ", xp = " .. SQLStr(xp) .. " WHERE player = " .. id .. ";")
 
 end
 
