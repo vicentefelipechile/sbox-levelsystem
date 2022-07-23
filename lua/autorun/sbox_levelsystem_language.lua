@@ -1,5 +1,3 @@
-if GAMEMODE_NAME != "sandbox" then return end
-
 -- https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 
 CreateConVar("sbox_ls_lang", "en", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The language to use for the level system.")
