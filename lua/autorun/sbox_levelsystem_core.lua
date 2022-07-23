@@ -21,7 +21,7 @@ CreateClientConVar("sbox_ls_notify_sound", "1", true, true, "Should the player b
 CreateClientConVar("sbox_ls_notify_chat", "0", true, true, "Should the player be notified with a chat message when they level up?")
 
 
-if SERVER and not sql.TableExists("sbox_levelsystem") then
+if SERVER and not sql.TableExists(darkrp_ls.db) then
     sql.Query([[CREATE TABLE IF NOT EXISTS ]] .. sbox_ls.db .. [[(
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         player INTEGER NOT NULL,
