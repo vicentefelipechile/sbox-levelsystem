@@ -1,5 +1,8 @@
 sbox_ls = {}
 sbox_ls.language = {}
+sbox_ls.db = "sbox_levelsystem"
+
+resource.AddWorkshop("2829026660")
 
 ----------------------------------
 ------------- Convars ------------
@@ -19,7 +22,7 @@ CreateClientConVar("sbox_ls_notify_chat", "0", true, true, "Should the player be
 
 
 if SERVER and not sql.TableExists("sbox_levelsystem") then
-    sql.Query([[CREATE TABLE IF NOT EXISTS sbox_levelsystem (
+    sql.Query([[CREATE TABLE IF NOT EXISTS ]] .. sbox_ls.db .. [[(
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         player INTEGER NOT NULL,
         plyname VARCHAR(255) NOT NULL,
