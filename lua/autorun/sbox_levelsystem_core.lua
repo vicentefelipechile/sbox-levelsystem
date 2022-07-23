@@ -1,3 +1,5 @@
+if GAMEMODE_NAME != "sandbox" then return end
+
 sbox_ls = {}
 sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
