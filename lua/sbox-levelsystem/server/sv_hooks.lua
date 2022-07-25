@@ -20,7 +20,7 @@ local xp_noclip = GetConVar("sbox_ls_noclip"):GetInt()
 ----------------------------------
 hook.Add("PlayerInitialSpawn", "SboxLS_connection", function(ply)
 	SLS_checkPlayerDatabase(ply)
-    SLS_levelUpPlayer(ply, xp_connections)
+    SLS_addXPToPlayer(ply, xp_connections)
     SLS_updatePlayerName(ply)
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
@@ -35,7 +35,7 @@ end)
 ----------------------------------
 hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
     SLS_checkPlayerDatabase(victim)
-    SLS_levelUpPlayer(victim, xp_deaths)
+    SLS_addXPToPlayer(victim, xp_deaths)
     SLS_updatePlayerName(victim)
 
     victim:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(victim))
@@ -43,7 +43,7 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
 
 	if inflictor:IsPlayer() and (victim ~= attacker) then
         SLS_checkPlayerDatabase(attacker)
-        SLS_levelUpPlayer(attacker, xp_kills)
+        SLS_addXPToPlayer(attacker, xp_kills)
         SLS_updatePlayerName(attacker)
 
         attacker:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(attacker))
@@ -58,7 +58,7 @@ end)
 ----------------------------------
 hook.Add("PlayerSay", "SboxLS_Chat", function(ply)
     SLS_checkPlayerDatabase(ply)
-    SLS_levelUpPlayer(ply, xp_chats)
+    SLS_addXPToPlayer(ply, xp_chats)
     SLS_updatePlayerName(ply)
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
@@ -72,7 +72,7 @@ end)
 ----------------------------------
 hook.Add("PhysgunPickup", "SboxLS_Physgun", function(ply)
     SLS_checkPlayerDatabase(ply)
-    SLS_levelUpPlayer(ply, xp_physgun)
+    SLS_addXPToPlayer(ply, xp_physgun)
     SLS_updatePlayerName(ply)
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
@@ -86,7 +86,7 @@ end)
 ----------------------------------
 hook.Add("PlayerNoClip", "SboxLS_Noclip", function(ply)
     SLS_checkPlayerDatabase(ply)
-    SLS_levelUpPlayer(ply, xp_noclip)
+    SLS_addXPToPlayer(ply, xp_noclip)
     SLS_updatePlayerName(ply)
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
