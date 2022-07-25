@@ -3,7 +3,7 @@ net.Receive("sbox_levelsystem_net", function()
 
     local level = data.level
     local xp = data.xp
-    local xp_total = SLS_getLevelExp(tonumber(level))
+    local xp_total = level.getLevelExp(level)
 
     ----------------------------------
     ------------- Windows ------------
@@ -20,7 +20,7 @@ net.Receive("sbox_levelsystem_net", function()
     local s1Label = vgui.Create("DLabel", sFrame)
     s1Label:SetPos(24, 30)
     s1Label:SetSize(285, 16)
-    s1Label:SetText(SLS_GetLanguage("level_current") .. ": " .. level)
+    s1Label:SetText(level.GetLanguage("level_current") .. ": " .. level)
 
     local s1Icon = vgui.Create("DImage", sFrame)
     s1Icon:SetPos(5, 30)
@@ -30,7 +30,7 @@ net.Receive("sbox_levelsystem_net", function()
     local s2Label = vgui.Create("DLabel", sFrame)
     s2Label:SetPos(24, 50)
     s2Label:SetSize(285, 16)
-    s2Label:SetText(SLS_GetLanguage("level_next1") ..  xp_total - xp .. " " .. SLS_GetLanguage("xp") .. SLS_GetLanguage("level_next2"))
+    s2Label:SetText(level.GetLanguage("level_next1") ..  xp_total - xp .. " " .. level.GetLanguage("xp") .. level.GetLanguage("level_next2"))
 
     local s2Icon = vgui.Create("DImage", sFrame)
     s2Icon:SetPos(5, 50)
@@ -40,7 +40,7 @@ net.Receive("sbox_levelsystem_net", function()
     local s3Label = vgui.Create("DLabel", sFrame)
     s3Label:SetPos(24, 70)
     s3Label:SetSize(285, 16)
-    s3Label:SetText(SLS_GetLanguage("xp_current") .. ": " .. xp .. " / " .. xp_total)
+    s3Label:SetText(level.GetLanguage("xp_current") .. ": " .. xp .. " / " .. xp_total)
 
     local s3Icon = vgui.Create("DImage", sFrame)
     s3Icon:SetPos(5, 70)
@@ -50,7 +50,7 @@ net.Receive("sbox_levelsystem_net", function()
     local s4Label = vgui.Create("DLabel", sFrame)
     s4Label:SetPos(24, 90)
     s4Label:SetSize(285, 16)
-    s4Label:SetText(SLS_GetLanguage("level") .. ": " .. level .. "/" .. #sbox_ls["levels"])
+    s4Label:SetText(level.GetLanguage("level") .. ": " .. level .. "/" .. #sbox_ls["levels"])
 
     local s4Icon = vgui.Create("DImage", sFrame)
     s4Icon:SetPos(5, 90)
@@ -65,5 +65,5 @@ net.Receive("sbox_levelsystem_net", function()
     local s5Label = vgui.Create("DLabel", sFrame)
     s5Label:SetPos(118, 160)
     s5Label:SetSize(285, 16)
-    s5Label:SetText(SLS_GetLanguage("progress") .. ": " .. math.Round(xp / xp_total * 100) .. "%")
+    s5Label:SetText(level.GetLanguage("progress") .. ": " .. math.Round(xp / xp_total * 100) .. "%")
 end)

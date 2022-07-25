@@ -1,5 +1,3 @@
-AddCSLuaFile()
-
 local meta = FindMetaTable("Player")
 if ( not meta ) then return end
 
@@ -31,7 +29,7 @@ function meta:GetPlayerXPToNextLevel()
     if ( not self:IsPlayer() ) then return 0 end
 
     local xp = self:GetPlayerXP()
-    local xp_total = SLS_getLevelExp(self:GetPlayerLevel())
+    local xp_total = level.getLevelExp(self:GetPlayerLevel())
 
     return xp_total-xp
 end
@@ -60,4 +58,12 @@ end
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelLessThan(level)
     return self:GetPlayerLevel() < level
+end
+
+--[[---------------------------------------------------------
+    Name: IsPlayerLevelBetween
+    Desc: Returns if the player's level is between the given levels
+-----------------------------------------------------------]]
+function meta:IsPlayerLevelBetween(level1, level2)
+    return self:GetPlayerLevel() >= level1 and self:GetPlayerLevel() <= level2
 end

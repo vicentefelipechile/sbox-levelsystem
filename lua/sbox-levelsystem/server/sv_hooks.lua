@@ -12,12 +12,12 @@ local xp_noclip = GetConVar("sbox_ls_noclip"):GetInt()
 ----------- Connection -----------
 ----------------------------------
 hook.Add("PlayerInitialSpawn", "SboxLS_connection", function(ply)
-	SLS_checkPlayerDatabase(ply)
-    SLS_addXPToPlayer(ply, xp_connections)
-    SLS_updatePlayerName(ply)
+	level.checkPlayerDatabase(ply)
+    level.addXPToPlayer(ply, xp_connections)
+    level.updatePlayerName(ply)
 
-    ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-    ply:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(ply))
+    ply:SetNWInt("sbox_ls_level", level.getLevelPlayer(ply))
+    ply:SetNWInt("sbox_ls_xp", level.getXPPlayer(ply))
 
 	return
 end)
@@ -27,20 +27,20 @@ end)
 -------------- Kills -------------
 ----------------------------------
 hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
-    SLS_checkPlayerDatabase(victim)
-    SLS_addXPToPlayer(victim, xp_deaths)
-    SLS_updatePlayerName(victim)
+    level.checkPlayerDatabase(victim)
+    level.addXPToPlayer(victim, xp_deaths)
+    level.updatePlayerName(victim)
 
-    victim:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(victim))
-    victim:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(victim))
+    victim:SetNWInt("sbox_ls_level", level.getLevelPlayer(victim))
+    victim:SetNWInt("sbox_ls_xp", level.getXPPlayer(victim))
 
 	if inflictor:IsPlayer() and (victim ~= attacker) then
-        SLS_checkPlayerDatabase(attacker)
-        SLS_addXPToPlayer(attacker, xp_kills)
-        SLS_updatePlayerName(attacker)
+        level.checkPlayerDatabase(attacker)
+        level.addXPToPlayer(attacker, xp_kills)
+        level.updatePlayerName(attacker)
 
-        attacker:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(attacker))
-        attacker:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(attacker))
+        attacker:SetNWInt("sbox_ls_level", level.getLevelPlayer(attacker))
+        attacker:SetNWInt("sbox_ls_xp", level.getXPPlayer(attacker))
 	end
 
 	return
@@ -50,12 +50,12 @@ end)
 -------------- Chats -------------
 ----------------------------------
 hook.Add("PlayerSay", "SboxLS_Chat", function(ply)
-    SLS_checkPlayerDatabase(ply)
-    SLS_addXPToPlayer(ply, xp_chats)
-    SLS_updatePlayerName(ply)
+    level.checkPlayerDatabase(ply)
+    level.addXPToPlayer(ply, xp_chats)
+    level.updatePlayerName(ply)
 
-    ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-    ply:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(ply))
+    ply:SetNWInt("sbox_ls_level", level.getLevelPlayer(ply))
+    ply:SetNWInt("sbox_ls_xp", level.getXPPlayer(ply))
 
     return
 end)
@@ -64,12 +64,12 @@ end)
 ------------- Physgun ------------
 ----------------------------------
 hook.Add("PhysgunPickup", "SboxLS_Physgun", function(ply)
-    SLS_checkPlayerDatabase(ply)
-    SLS_addXPToPlayer(ply, xp_physgun)
-    SLS_updatePlayerName(ply)
+    level.checkPlayerDatabase(ply)
+    level.addXPToPlayer(ply, xp_physgun)
+    level.updatePlayerName(ply)
 
-    ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-    ply:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(ply))
+    ply:SetNWInt("sbox_ls_level", level.getLevelPlayer(ply))
+    ply:SetNWInt("sbox_ls_xp", level.getXPPlayer(ply))
 
     return
 end)
@@ -78,12 +78,12 @@ end)
 ------------- Noclip -------------
 ----------------------------------
 hook.Add("PlayerNoClip", "SboxLS_Noclip", function(ply)
-    SLS_checkPlayerDatabase(ply)
-    SLS_addXPToPlayer(ply, xp_noclip)
-    SLS_updatePlayerName(ply)
+    level.checkPlayerDatabase(ply)
+    level.addXPToPlayer(ply, xp_noclip)
+    level.updatePlayerName(ply)
 
-    ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-    ply:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(ply))
+    ply:SetNWInt("sbox_ls_level", level.getLevelPlayer(ply))
+    ply:SetNWInt("sbox_ls_xp", level.getXPPlayer(ply))
 
     return
 end)
@@ -93,7 +93,7 @@ end)
 ----------------------------------
 --[[
 hook.Add("onPlayerLevelUp", "SboxLS_LevelUp", function(ply)
-    print(ply .. " has leveled up to level " .. SLS_getLevelPlayer(ply))
+    print(ply .. " has leveled up to level " .. level.getLevelPlayer(ply))
     return
 end)
 --]]
