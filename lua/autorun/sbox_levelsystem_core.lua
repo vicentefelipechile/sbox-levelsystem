@@ -58,6 +58,15 @@ local function AddFile(file, dir)
     end
 end
 
+local function AddExtension()
+    local dir = "includes/extensions/sandbox_level/"
+    local files = file.Find(dir .. "*.lua", "LUA")
+    for _, file in pairs(files) do
+        include(dir .. file)
+        print("[SBOX-LS] EXTENSION INCLUDE: " .. file)
+    end
+end
+
 local function AddDir(dir)
     dir = dir .. "/"
 
@@ -71,3 +80,4 @@ local function AddDir(dir)
     for _, v in ipairs(directories) do AddDir(dir .. v) end
 end
 AddDir("sbox-levelsystem")
+AddExtension()

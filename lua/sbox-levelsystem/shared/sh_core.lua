@@ -10,6 +10,11 @@ function SLS_getLevelPlayer(ply)
     end
 end
 
+function SLS_getXPPlayer(ply)
+    local data = sql.Query("SELECT xp FROM " .. sbox_ls.db .. " WHERE player = " .. ply:SteamID64() .. ";")
+    return tonumber(data[1].xp)
+end
+
 function SLS_getLevelExp(level)
     local xp = sbox_ls["levels"][level]
     return tonumber(xp)

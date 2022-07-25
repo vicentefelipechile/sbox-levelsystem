@@ -24,6 +24,7 @@ hook.Add("PlayerInitialSpawn", "SboxLS_connection", function(ply)
     SLS_updatePlayerName(ply)
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
+    ply:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(ply))
 
 	return
 end)
@@ -38,6 +39,7 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
     SLS_updatePlayerName(victim)
 
     victim:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(victim))
+    victim:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(victim))
 
 	if inflictor:IsPlayer() and (victim ~= attacker) then
         SLS_checkPlayerDatabase(attacker)
@@ -45,6 +47,7 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
         SLS_updatePlayerName(attacker)
 
         attacker:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(attacker))
+        attacker:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(attacker))
 	end
 
 	return
@@ -59,6 +62,8 @@ hook.Add("PlayerSay", "SboxLS_Chat", function(ply)
     SLS_updatePlayerName(ply)
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
+    ply:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(ply))
+
     return
 end)
 
@@ -71,6 +76,8 @@ hook.Add("PhysgunPickup", "SboxLS_Physgun", function(ply)
     SLS_updatePlayerName(ply)
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
+    ply:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(ply))
+
     return
 end)
 
@@ -83,5 +90,7 @@ hook.Add("PlayerNoClip", "SboxLS_Noclip", function(ply)
     SLS_updatePlayerName(ply)
 
     ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
+    ply:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(ply))
+
     return
 end)
