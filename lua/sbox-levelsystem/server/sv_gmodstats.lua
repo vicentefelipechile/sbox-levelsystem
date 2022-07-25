@@ -1,4 +1,4 @@
-local function level.GetGmodStats(ply)
+local function SLS_GetGmodStats(ply)
 
     if not sql.TableExists("stats_mp") then return end
 
@@ -43,6 +43,6 @@ end
 
 hook.Add("PlayerSay", "SboxLS_gmodstats", function(ply, text)
     if text == "!level gmodstats" then
-        level.GetGmodStats(ply)
+        SLS_GetGmodStats(ply)
     end
 end)

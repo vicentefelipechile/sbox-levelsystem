@@ -7,7 +7,7 @@ local lang_table = {
     ["es"] = "spanish"
 }
 
-function level.GetLanguage(phrase)
+function SLS_GetLanguage(phrase)
     local language = lang_table[lang:GetString()] or "english"
     return sbox_ls.language[language][phrase] or phrase
 end

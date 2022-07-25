@@ -1,4 +1,3 @@
-level = {}
 sbox_ls = {}
 sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
