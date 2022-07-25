@@ -29,6 +29,7 @@ end
 -----------------------------------------------------------]]
 function meta:GetPlayerXPToNextLevel()
     if ( not self:IsPlayer() ) then return 0 end
+
     local xp = self:GetPlayerXP()
     local xp_total = SLS_getLevelExp(self:GetPlayerLevel())
 
