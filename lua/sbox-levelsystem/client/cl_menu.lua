@@ -55,7 +55,7 @@ net.Receive("sbox_levelsystem_net", function()
     local s4Icon = vgui.Create("DImage", sFrame)
     s4Icon:SetPos(5, 90)
     s4Icon:SetSize(16, 16)
-    s4Icon:SetImage("sbox_levelsystem/SLS_png")
+    s4Icon:SetImage("sbox_levelsystem/level.png")
 
     local s1Progress = vgui.Create("DProgress", sFrame)
     s1Progress:SetPos(5, 178)
