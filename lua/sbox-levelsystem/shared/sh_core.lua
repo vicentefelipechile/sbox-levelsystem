@@ -27,8 +27,8 @@ function SLS_checkPlayerDatabase(ply)
     end
 end
 
-function SLS_addXPToPlayer(ply, xp_type)
-    local xp = tonumber(sql.Query("SELECT xp FROM " .. sbox_ls.db .. " WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp_type
+function SLS_addXPToPlayer(ply, xp)
+    local xp = tonumber(sql.Query("SELECT xp FROM " .. sbox_ls.db .. " WHERE player = " .. ply:SteamID64() .. ";")[1]["xp"]) + xp
     local xp_total = SLS_getLevelExp(SLS_getLevelPlayer(ply))
     local level = SLS_getLevelPlayer(ply)
 
