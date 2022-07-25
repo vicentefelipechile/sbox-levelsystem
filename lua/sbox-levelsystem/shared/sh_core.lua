@@ -37,6 +37,7 @@ function SLS_levelUpPlayer(ply, xp_type)
     end
 
     if xp > xp_total then
+        hook.Call("onPlayerLevelUp", GAMEMODE, ply, level)
         sql.Query("UPDATE " .. sbox_ls.db .. " SET level = " .. sql.SQLStr(SLS_getLevelPlayer(ply) + 1) .. ", xp = 0 WHERE player = " .. ply:SteamID64() .. ";")
         sql.Query("UPDATE " .. sbox_ls.db .. " SET xp = " .. sql.SQLStr(xp-xp_total) .. " WHERE player = " .. ply:SteamID64() .. ";")
     else
@@ -47,3 +48,12 @@ end
 function SLS_updatePlayerName(ply)
     sql.Query("UPDATE " .. sbox_ls.db .. " SET plyname = " .. sql.SQLStr(ply:Name()) .. " WHERE player = " .. ply:SteamID64() .. ";")
 end
+
+
+----------------------------------
+------------ Hooks ---------------
+----------------------------------
+local function playerLevelUp(ply, level)
+    return ply, level
+end
+hook.Add("onPlayerLevelUp", "SLS_onPlayerLevelUp", playerLevelUp)
