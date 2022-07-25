@@ -94,3 +94,13 @@ hook.Add("PlayerNoClip", "SboxLS_Noclip", function(ply)
 
     return
 end)
+
+----------------------------------
+--------- Player LevelUp ---------
+----------------------------------
+--[[
+hook.Add("onPlayerLevelUp", "SboxLS_LevelUp", function(ply)
+    print(ply .. " has leveled up to level " .. SLS_getLevelPlayer(ply))
+    return
+end)
+--]]
