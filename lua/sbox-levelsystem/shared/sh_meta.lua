@@ -40,6 +40,7 @@ end
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelEqualTo(level)
     if ( not self:IsPlayer() ) then return false end
+    if ( not level or isnumber(level) ) then return false end
 
     return tonumber(self:GetPlayerLevel()) == level
 end
@@ -49,6 +50,9 @@ end
     Desc: Returns if the player's level is more than the given level
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelMoreThan(level)
+    if ( not self:IsPlayer() ) then return false end
+    if ( not level or isnumber(level) ) then return false end
+
     return self:GetPlayerLevel() >= level
 end
 
@@ -57,6 +61,9 @@ end
     Desc: Returns if the player's level is less than the given level
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelLessThan(level)
+    if ( not self:IsPlayer() ) then return false end
+    if ( not level or isnumber(level) ) then return false end
+
     return self:GetPlayerLevel() < level
 end
 
@@ -65,5 +72,21 @@ end
     Desc: Returns if the player's level is between the given levels
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelBetween(level1, level2)
+    if ( not self:IsPlayer() ) then return false end
+    if ( not level1 or isnumber(level1) ) then return false end
+    if ( not level2 or isnumber(level2) ) then return false end
+
     return self:GetPlayerLevel() >= level1 and self:GetPlayerLevel() <= level2
+end
+
+--[[---------------------------------------------------------
+    Name: AddXP
+    Desc: Adds XP to the player
+-----------------------------------------------------------]]
+function meta:AddXP(xp)
+    if ( not self:IsPlayer() ) then return false end
+    if ( not xp or isnumber(xp) ) then return false end
+
+    SLS_addXPToPlayer(self, xp)
+    return true
 end
