@@ -2,23 +2,14 @@
 ------------ Functions -----------
 ----------------------------------
 function SLS_getData(ply, datatype)
-    if ( not ply:IsPlayer() ) then return false end
-    if ( not datatype or isstring(datatype) ) then return false end
-
     return tonumber(sql.Query("SELECT " .. sql.SQLStr(datatype) .. " FROM " .. sbox_ls.db .. " WHERE steamid = " .. ply:SteamID() .. ";")[1][datatype])
 end
 
 function SLS_setData(ply, datatype, value)
-    if ( not ply:IsPlayer() ) then return false end
-    if ( not datatype or isstring(datatype) ) then return false end
-    if ( not value or isstring(value) ) then return false end
-
     sql.Query("UPDATE " .. sbox_ls.db .. " SET " .. sql.SQLStr(datatype) .. " = " .. sql.SQLStr(value) .. " WHERE steamid = " .. ply:SteamID() .. ";")
-
-    return true
 end
 
-function SLS_getLevelPlayer(ply)
+function SLS_getPlayerLevel(ply)
     if ( not ply:IsPlayer() ) then return 1 end
 
     local data = SLS_getData(ply, "level")
@@ -29,7 +20,7 @@ function SLS_getLevelPlayer(ply)
     end
 end
 
-function SLS_getXPPlayer(ply)
+function SLS_getPlayerXP(ply)
     local data = SLS_getData(ply, "xp")
     return tonumber(data)
 end

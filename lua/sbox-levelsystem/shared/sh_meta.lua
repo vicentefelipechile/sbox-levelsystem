@@ -8,7 +8,7 @@ if ( not meta ) then return end
 function meta:GetPlayerLevel()
     if ( not self:IsPlayer() ) then return 1 end
 
-    return tonumber(self:GetNWInt("sbox_ls_level"))
+    return SLS_GetPlayerLevel(self)
 end
 
 --[[---------------------------------------------------------
@@ -18,7 +18,7 @@ end
 function meta:GetPlayerXP()
     if ( not self:IsPlayer() ) then return 0 end
 
-    return tonumber(self:GetNWInt("sbox_ls_xp"))
+    return SLS_GetPlayerXP(self)
 end
 
 --[[---------------------------------------------------------
@@ -40,7 +40,7 @@ end
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelEqualTo(level)
     if ( not self:IsPlayer() ) then return false end
-    if ( not level or isnumber(level) ) then return false end
+    if ( not isnumber(level) ) then return false end
 
     return tonumber(self:GetPlayerLevel()) == level
 end
@@ -51,7 +51,7 @@ end
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelMoreThan(level)
     if ( not self:IsPlayer() ) then return false end
-    if ( not level or isnumber(level) ) then return false end
+    if ( not isnumber(level) ) then return false end
 
     return self:GetPlayerLevel() >= level
 end
@@ -62,7 +62,7 @@ end
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelLessThan(level)
     if ( not self:IsPlayer() ) then return false end
-    if ( not level or isnumber(level) ) then return false end
+    if ( not isnumber(level) ) then return false end
 
     return self:GetPlayerLevel() < level
 end
@@ -73,8 +73,6 @@ end
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelBetween(level1, level2)
     if ( not self:IsPlayer() ) then return false end
-    if ( not level1 or isnumber(level1) ) then return false end
-    if ( not level2 or isnumber(level2) ) then return false end
 
     return self:GetPlayerLevel() >= level1 and self:GetPlayerLevel() <= level2
 end
@@ -85,8 +83,27 @@ end
 -----------------------------------------------------------]]
 function meta:AddXP(xp)
     if ( not self:IsPlayer() ) then return false end
-    if ( not xp or isnumber(xp) ) then return false end
+    if ( not isnumber(xp) ) then return false end
 
     SLS_addXPToPlayer(self, xp)
+    return true
+end
+
+
+
+--[[---------------------------------------------------------
+    Name: AddPercentageXP
+    Desc: Adds a porcentage of XP to the player, the XP is the percentage of the total XP
+-----------------------------------------------------------]]
+function meta:AddPercentageXP(xp)
+    if ( not self:IsPlayer() ) then return false end
+    if ( not xp or isnumber(xp) ) then return false end
+
+    if xp > 1 then
+        xp = xp/100
+    end
+
+    local xp_total = math.Round(SLS_getLevelExp(self:GetPlayerLevel()) * xp)
+    SLS_addXPToPlayer(self, xp_total)
     return true
 end
