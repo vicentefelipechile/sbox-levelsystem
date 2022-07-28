@@ -33,7 +33,7 @@ function SLS_setPlayerLevel(ply, level)
     sql.Query("UPDATE " .. sbox_ls.db .. " SET level = " .. sql.SQLStr(level) .. " WHERE player = " .. ply:SteamID64() .. ";")
 end
 
-function DLS_setPlayerXP(ply, xp)
+function SLS_setPlayerXP(ply, xp)
     sql.Query("UPDATE " .. sbox_ls.db .. " SET xp = " .. sql.SQLStr(xp) .. " WHERE player = " .. ply:SteamID64() .. ";")
 end
 
