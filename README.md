@@ -22,7 +22,7 @@ a simple system that adds levels to the sandbox (may be compatible with other ga
 you can find all functions in [this file](https://github.com/SuperCALIENTITO/sbox-levelsystem/blob/main/lua/sbox-levelsystem/shared/sh_core.lua)
 
 ```lua
-SLS_getLevelPlayer(ply)
+SLS_getPlayerLevel(ply)
 
 -- returns the current level of the player,
 -- if the level exceeds the number of existing levels,
@@ -30,13 +30,13 @@ SLS_getLevelPlayer(ply)
 ```
 
 ```lua
-SLS_getXPPlayer(ply)
+SLS_getPlayerXP(ply)
 
 -- returns the player's current experience
 ```
 
 ```lua
-SLS_getLevelExp(level)
+SLS_getLevelXP(level)
 
 -- returns the amount of experience for the level
 ```
@@ -102,3 +102,9 @@ ply:IsPlayerLevelLessThan(level)
 -- (boolean)
 -- returns if the player is less than the level
 ```
+
+
+# Mapping Latam
+
+- [Github](https://github.com/mapping-latam)
+- [Discord](https://github.com/mapping-latam)
