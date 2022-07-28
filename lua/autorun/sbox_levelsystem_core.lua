@@ -1,6 +1,7 @@
 sbox_ls = {}
 sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
+sbox_ls.display_level = true
 
 -- resource.AddWorkshop("2829026660")
 
@@ -40,21 +41,21 @@ local function AddFile(file, dir)
     local prefix = string.lower(string.Left(file, 3))
     if SERVER and (prefix == "sv_") then
         include(dir .. file)
-        print("[SBOX-LS] SERVER INCLUDE: " .. file)
+        print("[SBOX-LS] SERVER INCLUDE: " .. dir .. file)
     elseif (prefix == "sh_") then
         if SERVER then
             AddCSLuaFile(dir .. file)
-            print("[SBOX-LS] SHARED ADDCS: " .. file)
+            print("[SBOX-LS] SHARED ADDCS: " .. dir .. file)
         end
         include(dir .. file)
-        print("[SBOX-LS] SHARED INCLUDE: " .. file)
+        print("[SBOX-LS] SHARED INCLUDE: " .. dir .. file)
     elseif (prefix == "cl_") then
         if SERVER then
             AddCSLuaFile(dir .. file)
-            print("[SBOX-LS] CLIENT ADDCS: " .. file)
+            print("[SBOX-LS] CLIENT ADDCS: " .. dir .. file)
         elseif CLIENT then
             include(dir .. file)
-            print("[SBOX-LS] CLIENT INCLUDE: " .. file)
+            print("[SBOX-LS] CLIENT INCLUDE: " .. dir .. file)
         end
     end
 end

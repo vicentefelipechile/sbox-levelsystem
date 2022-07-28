@@ -7,4 +7,7 @@ sbox_ls.language["spanish"] = {
     ["level"] = "Nivel",
     ["xp"] = "Experiencia",
     ["progress"] = "Progreso",
+
+    ["prefix"] = "[SBOX-LS]",
+    ["levelup"] = "ha subido de nivel a",
 }

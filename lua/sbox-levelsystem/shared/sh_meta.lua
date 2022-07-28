@@ -8,7 +8,7 @@ if ( not meta ) then return end
 function meta:GetPlayerLevel()
     if ( not self:IsPlayer() ) then return 1 end
 
-    return SLS_GetPlayerLevel(self)
+    return SLS_getPlayerLevel(self)
 end
 
 --[[---------------------------------------------------------
@@ -18,7 +18,7 @@ end
 function meta:GetPlayerXP()
     if ( not self:IsPlayer() ) then return 0 end
 
-    return SLS_GetPlayerXP(self)
+    return SLS_getPlayerXP(self)
 end
 
 --[[---------------------------------------------------------
@@ -32,6 +32,26 @@ function meta:GetPlayerXPToNextLevel()
     local xp_total = SLS_getLevelExp(self:GetPlayerLevel())
 
     return xp_total-xp
+end
+
+--[[---------------------------------------------------------
+    Name: SetPlayerLevel
+    Desc: Sets the player's level
+-----------------------------------------------------------]]
+function meta:SetPlayerLevel(level)
+    if ( not self:IsPlayer() ) then return end
+
+    SLS_setPlayerLevel(self, level)
+end
+
+--[[---------------------------------------------------------
+    Name: SetPlayerXP
+    Desc: Sets the player's XP
+-----------------------------------------------------------]]
+function meta:SetPlayerXP(xp)
+    if ( not self:IsPlayer() ) then return end
+
+    SLS_setPlayerXP(self, xp)
 end
 
 --[[---------------------------------------------------------
