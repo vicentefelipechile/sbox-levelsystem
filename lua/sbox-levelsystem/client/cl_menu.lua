@@ -3,7 +3,7 @@ net.Receive("sbox_levelsystem_net", function()
 
     local level = data.level
     local xp = data.xp
-    local xp_total = SLS_getLevelExp(level)
+    local xp_total = SLS_getLevelXP(level)
 
     ----------------------------------
     ------------- Windows ------------
