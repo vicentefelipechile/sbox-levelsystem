@@ -1,3 +1,4 @@
+-- Formula = 100 + ( level * 29 )
 sbox_ls["levels"] = {
     [1] = 129,
     [2] = 158,
