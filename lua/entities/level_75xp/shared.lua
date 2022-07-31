@@ -2,7 +2,7 @@ ENT.Type = "anim"
 ENT.Base = "base_anim"
 
 ENT.PrintName = "75% XP"
-ENT.Category = "DarkRP Level System"
+ENT.Category = "Sandbox Level System"
 ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.DisableDuplicator = true
