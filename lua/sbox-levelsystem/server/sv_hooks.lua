@@ -69,8 +69,8 @@ hook.Add("PhysgunPickup", "SboxLS_Physgun", function(ply, ent)
         SLS_addXPToPlayer(ply, xp_physgun)
         SLS_updatePlayerName(ply)
 
-        ply:SetNWInt("sbox_ls_level", SLS_getLevelPlayer(ply))
-        ply:SetNWInt("sbox_ls_xp", SLS_getXPPlayer(ply))
+        ply:SetNWInt("sbox_ls_level", SLS_getPlayerLevel(ply))
+        ply:SetNWInt("sbox_ls_xp", SLS_getPlayerXP(ply))
     end
 
     return
