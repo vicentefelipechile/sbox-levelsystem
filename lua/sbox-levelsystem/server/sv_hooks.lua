@@ -7,6 +7,7 @@ local xp_chats = GetConVar("sbox_ls_chats"):GetInt()
 local xp_physgun = GetConVar("sbox_ls_physgun"):GetInt()
 local xp_connections = GetConVar("sbox_ls_connections"):GetInt()
 local xp_noclip = GetConVar("sbox_ls_noclip"):GetInt()
+local xp_npc_killed = GetConVar("sbox_ls_npc_killed"):GetInt()
 
 ----------------------------------
 ----------- Connection -----------
@@ -91,11 +92,17 @@ hook.Add("PlayerNoClip", "SboxLS_Noclip", function(ply)
 end)
 
 ----------------------------------
---------- Player LevelUp ---------
+--------- NPC Killed ---------
 ----------------------------------
---[[
-hook.Add("onPlayerLevelUp", "SboxLS_LevelUp", function(ply)
-    print(ply .. " has leveled up to level " .. SLS_getPlayerLevel(ply))
+hook.Add("OnNPCKilled", "SboxLS_NPCKilled", function(npc, attacker, inflictor)
+    if inflictor:IsPlayer() and ( npc:IsNPC() or npc:IsNextBot() ) then
+        SLS_checkPlayerDatabase(attacker)
+        SLS_addXPToPlayer(attacker, xp_kills)
+        SLS_updatePlayerName(attacker)
+
+        attacker:SetNWInt("sbox_ls_level", SLS_getPlayerLevel(attacker))
+        attacker:SetNWInt("sbox_ls_xp", SLS_getPlayerXP(attacker))
+    end
+
     return
 end)
---]]
