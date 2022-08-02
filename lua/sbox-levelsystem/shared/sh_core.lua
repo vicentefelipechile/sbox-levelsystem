@@ -58,7 +58,7 @@ function SLS_addXPToPlayer(ply, xp)
             hook.Call("GDR_sendMessage", nil,
                 sbox_ls.gdr_picture,
                 sbox_ls.gdr_name,
-                ply:Nick() .. " has reached level " .. SLS_getPlayerLevel(ply)
+                ply:Nick() .. sbox_ls.gdr_message .. SLS_getPlayerLevel(ply)
             )
         end
     else
