@@ -1,8 +1,8 @@
-local function SLS_GetGmodStats(ply)
+function SLS_ext_GetGmodStats(ply)
 
-    if not sql.TableExists("stats_mp") then return end
+    if not sql.TableExists(sbox_ls.gmodstats_db) then return end
 
-    local stats = sql.Query("SELECT * FROM stats_mp WHERE player = " .. sql.SQLStr(ply:SteamID64()) .. ";")
+    local stats = sql.Query("SELECT * FROM " sbox_ls.gmodstats_db " WHERE player = " .. sql.SQLStr(ply:SteamID64()) .. ";")
 
     local id = ply:SteamID64()
     local xp_connections = tonumber(stats[1]["connection"]) * GetConVar("sbox_ls_connections"):GetInt()
@@ -12,7 +12,7 @@ local function SLS_GetGmodStats(ply)
     local xp_kills = tonumber(stats[1]["kill"]) * GetConVar("sbox_ls_kills"):GetInt()
     local xp_chat = tonumber(stats[1]["chat"]) * GetConVar("sbox_ls_chats"):GetInt()
     local xp_total = 0
-    for k, v in ipairs(sbox_ls["levels"]) do
+    for _, v in ipairs(sbox_ls["levels"]) do
         xp_total = xp_total + v
     end
 
@@ -21,7 +21,7 @@ local function SLS_GetGmodStats(ply)
 
     local level = 1
     local xp_level = 0
-    for k, v in ipairs(sbox_ls["levels"]) do
+    for _, v in ipairs(sbox_ls["levels"]) do
         xp_total = xp_total + v
     end
 
@@ -41,8 +41,9 @@ local function SLS_GetGmodStats(ply)
 
 end
 
+
 hook.Add("PlayerSay", "SboxLS_gmodstats", function(ply, text)
-    if text == "!level gmodstats" then
-        SLS_GetGmodStats(ply)
+    if text == "!level gmodstats" and sbox_ls.gmodstats_enable then
+        SLS_ext_GetGmodStats(ply)
     end
 end)

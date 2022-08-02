@@ -2,6 +2,7 @@ sbox_ls = {}
 sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
 sbox_ls.display_level = true
+sbox_ls.prefix = "[SBOX-LS] "
 
 -- resource.AddWorkshop("2829026660")
 
@@ -25,7 +26,7 @@ CreateClientConVar("sbox_ls_notify_chat", "0", true, true, "Should the player be
 end
 
 if SERVER and not sql.TableExists(sbox_ls.db) then
-    sql.Query([[CREATE TABLE IF NOT EXISTS ]] .. sbox_ls.db .. [[(
+    sql.Query([[CREATE TABLE IF NOT EXISTS ]] .. sbox_ls.db .. [[ (
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         player INTEGER NOT NULL,
         plyname VARCHAR(255) NOT NULL,
@@ -79,7 +80,20 @@ AddDir("sbox-levelsystem")
 ----------------------------------
 ----------- Extensions -----------
 ----------------------------------
-sbox_ls.gdr_enable = false
+
+-- GDR
+-- https://github.com/44lr/gdr_addon
+sbox_ls.gdr_enable = false -- Enable/disable the GDR addon.
 sbox_ls.gdr_picture = "https://i.imgur.com/EKHWx6Y.png"
 sbox_ls.gdr_name = "Sandbox Level System"
 sbox_ls.gdr_message = " has reached level "
+
+-- Gmod Stats
+-- https://steamcommunity.com/sharedfiles/filedetails/?id=2829026660
+sbox_ls.gmodstats_enable = true -- Enable/Disable the gmodstats integration.
+sbox_ls.gmodstats_db = "stats_mp"
+
+-- Math Problems
+-- https://steamcommunity.com/sharedfiles/filedetails/?id=2805623775
+sbox_ls.maths_enable = true -- Enable/Disable the maths integration.
+sbox_ls.math_db = "math_points"

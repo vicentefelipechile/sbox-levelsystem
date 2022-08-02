@@ -55,11 +55,7 @@ function SLS_addXPToPlayer(ply, xp)
 
         -- GDR
         if tGDRConfig and sbox_ls.gdr_enable then
-            hook.Call("GDR_sendMessage", nil,
-                sbox_ls.gdr_picture,
-                sbox_ls.gdr_name,
-                ply:Nick() .. sbox_ls.gdr_message .. SLS_getPlayerLevel(ply)
-            )
+            hook.Call("GDR_sendMessage", nil, sbox_ls.gdr_picture, sbox_ls.gdr_name, ply:Nick() .. sbox_ls.gdr_message .. SLS_getPlayerLevel(ply))
         end
     else
         sql.Query("UPDATE " .. sbox_ls.db .. " SET xp = " .. xp .. " WHERE player = " .. ply:SteamID64() .. ";")

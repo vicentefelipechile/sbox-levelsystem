@@ -8,6 +8,9 @@ sbox_ls.language["english"] = {
     ["xp"] = "XP",
     ["progress"] = "Progress",
 
-    ["prefix"] = "[SBOX-LS]",
     ["levelup"] = "has level up to",
+    ["updated"] = "your level has been updated successfully.",
+
+    ["disabled_gmodstats"] = "Gmod Stats isn't activated or isn't found.",
+    ["disabled_maths"] = "Math Questions isn't activated or isn't found.",
 }
