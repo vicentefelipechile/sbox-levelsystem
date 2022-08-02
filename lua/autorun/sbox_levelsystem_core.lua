@@ -73,3 +73,12 @@ local function AddDir(dir)
     for _, v in ipairs(directories) do AddDir(dir .. v) end
 end
 AddDir("sbox-levelsystem")
+
+
+----------------------------------
+----------- Extensions -----------
+----------------------------------
+sbox_ls.gdr_enable = false
+sbox_ls.gdr_picture = "https://i.imgur.com/EKHWx6Y.png"
+sbox_ls.gdr_name = "Sandbox Level System"
+sbox_ls.gdr_message = " has reached level "
