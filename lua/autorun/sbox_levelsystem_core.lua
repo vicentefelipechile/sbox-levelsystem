@@ -4,7 +4,7 @@ sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
 sbox_ls.display_level = true
 sbox_ls.prefix = "[SBOX-LS]"
-darkrp_ls.prefix_color = Color(91, 123, 227)
+sbox_ls.prefix_color = Color(91, 123, 227)
 
 -- resource.AddWorkshop("2829026660")
 
