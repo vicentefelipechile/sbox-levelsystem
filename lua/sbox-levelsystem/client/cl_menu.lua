@@ -3,7 +3,7 @@ net.Receive("sandbox_levelsystem_menu", function()
 
     local level = data.level
     local xp = data.xp
-    local xp_total = SLS.getLevelXP(level)
+    local xp_total = SLS.getLevelXP(tonumber(level))
 
     ----------------------------------
     ------------- Windows ------------
