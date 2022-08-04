@@ -67,6 +67,7 @@ function SLS.addXPToPlayer(ply, xp)
         end
 
     else
+        hook.Call("onPlayerGetXP", nil, ply, xp)
         SLS.setPlayerXP(ply, xp)
     end
 end
