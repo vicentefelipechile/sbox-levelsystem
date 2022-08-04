@@ -49,42 +49,9 @@ function SLS.setData(ply, datatype, value)
 end
 
 function SLS.addXPToPlayer(ply, xp)
-    local xp_plus = 0
-
-    if sbox_ls.debug then
-        print("\n--------------")
-    end
-
-    -- Global Bonus XP
-    if sbox_ls.global_xp and ( sbox_ls.global_xp_percentage >= 1 ) then
-        xp_plus = math.Round(xp * ( 1 + ( sbox_ls.global_xp_percentage / 100 ) ))
-    end
-
-    if sbox_ls.debug then
-        print("XP Global Bonus: " .. xp_plus)
-    end
-
-    -- VIPs get a bonus XP
-    if table.HasValue(sbox_ls.vip_group, ply:GetUserGroup()) and ( sbox_ls.vip_enabled ) then
-        xp_plus = math.Round(xp * sbox_ls.vip_multiplier) + xp_plus
-    end
-
-    if sbox_ls.debug then
-        print("XP VIP Bonus   : " .. math.Round(xp * sbox_ls.vip_multiplier))
-        print("XP Plus Total  : " .. xp_plus)
-        print("XP             : " .. xp)
-        print("XP Total       : " .. xp + xp_plus)
-        print("XP Level       : " .. SLS.getPlayerXP(ply))
-    end
-
     local level = SLS.getPlayerLevel(ply)
-    local xp = SLS.getPlayerXP(ply) + xp + xp_plus
+    local xp = SLS.getPlayerXP(ply) + xp
     local xp_total = SLS.getLevelXP(level)
-
-    if sbox_ls.debug then
-        print("XP Total: " .. xp_total)
-        print("--------------")
-    end
 
     if xp > xp_total then
         SLS.setPlayerXP(ply, xp_total)

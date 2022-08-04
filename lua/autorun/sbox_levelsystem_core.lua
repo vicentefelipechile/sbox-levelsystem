@@ -3,7 +3,8 @@ sbox_ls = {}
 sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
 sbox_ls.display_level = true
-sbox_ls.prefix = "[SBOX-LS] "
+sbox_ls.prefix = "[SBOX-LS]"
+darkrp_ls.prefix_color = Color(91, 123, 227)
 
 -- resource.AddWorkshop("2829026660")
 
@@ -11,6 +12,9 @@ sbox_ls.prefix = "[SBOX-LS] "
 ------------- Convars ------------
 ----------------------------------
 if SERVER then
+util.AddNetworkString("sandbox_levelsystem_levelup")
+util.AddNetworkString("sandbox_levelsystem_menu")
+
 CreateConVar("sbox_ls_connections", "15", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player connects.")
 CreateConVar("sbox_ls_kills", "15", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player kills someone.")
 CreateConVar("sbox_ls_deaths", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player dies.")

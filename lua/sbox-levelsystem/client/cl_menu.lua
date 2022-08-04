@@ -1,4 +1,4 @@
-net.Receive("sbox_levelsystem_net", function()
+net.Receive("sandbox_levelsystem_menu", function()
     local data = net.ReadTable()
 
     local level = data.level
