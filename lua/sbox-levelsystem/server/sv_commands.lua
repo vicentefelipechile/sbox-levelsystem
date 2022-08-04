@@ -10,9 +10,6 @@ hook.Add("PlayerSay", "SboxLS_commands", function(ply, text)
                 xp = stats[1]["xp"]
             })
         net.Send(ply)
-        
-        return ""
-    end
 
-    return text
+    end
 end)

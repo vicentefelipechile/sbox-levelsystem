@@ -1,3 +1,4 @@
+SLS = {}
 sbox_ls = {}
 sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
@@ -95,5 +96,5 @@ sbox_ls.gmodstats_db = "stats_mp"
 
 -- Math Problems
 -- https://steamcommunity.com/sharedfiles/filedetails/?id=2805623775
-sbox_ls.maths_enable = true -- Enable/Disable the maths integration.
+sbox_ls.maths_enable = false -- Enable/Disable the maths integration.
 sbox_ls.math_db = "math_points"

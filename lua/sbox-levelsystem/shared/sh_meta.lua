@@ -8,7 +8,7 @@ if ( not meta ) then return end
 function meta:GetPlayerLevel()
     if ( not self:IsPlayer() ) then return 1 end
 
-    return SLS_getPlayerLevel(self)
+    return SLS.getPlayerLevel(self)
 end
 
 --[[---------------------------------------------------------
@@ -18,7 +18,7 @@ end
 function meta:GetPlayerXP()
     if ( not self:IsPlayer() ) then return 0 end
 
-    return SLS_getPlayerXP(self)
+    return SLS.getPlayerXP(self)
 end
 
 --[[---------------------------------------------------------
@@ -29,7 +29,7 @@ function meta:GetPlayerXPToNextLevel()
     if ( not self:IsPlayer() ) then return 0 end
 
     local xp = self:GetPlayerXP()
-    local xp_total = SLS_getLevelXP(self:GetPlayerLevel())
+    local xp_total = SLS.getLevelXP(self:GetPlayerLevel())
 
     return xp_total-xp
 end
@@ -41,7 +41,7 @@ end
 function meta:SetPlayerLevel(level)
     if ( not self:IsPlayer() ) then return end
 
-    SLS_setPlayerLevel(self, level)
+    SLS.setPlayerLevel(self, level)
 end
 
 --[[---------------------------------------------------------
@@ -51,7 +51,7 @@ end
 function meta:SetPlayerXP(xp)
     if ( not self:IsPlayer() ) then return end
 
-    SLS_setPlayerXP(self, xp)
+    SLS.setPlayerXP(self, xp)
 end
 
 --[[---------------------------------------------------------
@@ -105,7 +105,7 @@ function meta:AddXP(xp)
     if ( not self:IsPlayer() ) then return false end
     if ( not isnumber(xp) ) then return false end
 
-    SLS_addXPToPlayer(self, xp)
+    SLS.addXPToPlayer(self, xp)
     return true
 end
 
@@ -123,7 +123,7 @@ function meta:AddPercentageXP(xp)
         xp = xp/100
     end
 
-    local xp_total = math.Round(SLS_getLevelExp(self:GetPlayerLevel()) * xp)
-    SLS_addXPToPlayer(self, xp_total)
+    local xp_total = math.Round(SLS.getLevelExp(self:GetPlayerLevel()) * xp)
+    SLS.addXPToPlayer(self, xp_total)
     return true
 end
