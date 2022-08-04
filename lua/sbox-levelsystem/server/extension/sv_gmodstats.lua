@@ -2,7 +2,7 @@ function SLS_ext_GetGmodStats(ply)
 
     if not sql.TableExists(sbox_ls.gmodstats_db) then return end
 
-    local stats = sql.Query("SELECT * FROM " sbox_ls.gmodstats_db " WHERE player = " .. sql.SQLStr(ply:SteamID64()) .. ";")
+    local stats = sql.Query("SELECT * FROM " .. sbox_ls.gmodstats_db .. " WHERE player = " .. sql.SQLStr(ply:SteamID64()) .. ";")
 
     local id = ply:SteamID64()
     local xp_connections = tonumber(stats[1]["connection"]) * GetConVar("sbox_ls_connections"):GetInt()
