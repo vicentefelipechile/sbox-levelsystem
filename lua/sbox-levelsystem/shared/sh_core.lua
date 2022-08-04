@@ -54,8 +54,8 @@ function SLS.addXPToPlayer(ply, xp)
     local xp_total = SLS.getLevelXP(level)
 
     if xp > xp_total then
-        SLS.setPlayerXP(ply, xp_total)
-        hook.Call("onPlayerGetXP", nil, ply, xp_total)
+        SLS.setPlayerXP(ply, xp-xp_total)
+        hook.Call("onPlayerGetXP", nil, ply, xp-xp_total)
 
         if #sbox_ls["levels"] > level then
             SLS.setPlayerLevel(ply, level+1)
