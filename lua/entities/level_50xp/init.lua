@@ -14,7 +14,8 @@ end
 
 function ENT:Use(ply, caller)
     if ply:IsPlayer() then
-        ply:AddPercentageXP(50)
+        local xp = math.Round(sbox_ls["levels"][ply:GetPlayerLevel()]*0.5)
+        ply:AddXP(xp)
         self:Remove()
         
         print("[SBOX-LS] Added 50% XP to " .. ply:Nick())

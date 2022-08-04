@@ -14,9 +14,10 @@ end
 
 function ENT:Use(ply, caller)
     if ply:IsPlayer() then
-        ply:AddPercentageXP(1)
+        ply:SetPlayerLevel(tonumber(ply:GetPlayerLevel()) + 1)
         self:Remove()
         
+        hook.Call("onPlayerLevelUp", nil, ply, SLS.getPlayerLevel(ply))
         print("[SBOX-LS] Level UP to " .. ply:Nick())
     end
 end

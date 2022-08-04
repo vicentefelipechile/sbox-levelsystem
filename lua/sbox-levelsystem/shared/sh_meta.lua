@@ -11,6 +11,8 @@ function meta:GetPlayerLevel()
     return SLS.getPlayerLevel(self)
 end
 
+
+
 --[[---------------------------------------------------------
     Name: GetPlayerXP
     Desc: Returns the player's XP
@@ -21,6 +23,8 @@ function meta:GetPlayerXP()
     return SLS.getPlayerXP(self)
 end
 
+
+
 --[[---------------------------------------------------------
     Name: GetPlayerXPToNextLevel
     Desc: Returns the player's XP to next level
@@ -28,11 +32,14 @@ end
 function meta:GetPlayerXPToNextLevel()
     if ( not self:IsPlayer() ) then return 0 end
 
+    local level = self:GetPlayerLevel()
     local xp = self:GetPlayerXP()
-    local xp_total = SLS.getLevelXP(self:GetPlayerLevel())
+    local xp_total = SLS.getLevelXP(level)
 
-    return xp_total-xp
+    return xp_total - xp
 end
+
+
 
 --[[---------------------------------------------------------
     Name: SetPlayerLevel
@@ -40,9 +47,12 @@ end
 -----------------------------------------------------------]]
 function meta:SetPlayerLevel(level)
     if ( not self:IsPlayer() ) then return end
+    if ( not level and isnumber(level) == false) then return end
 
     SLS.setPlayerLevel(self, level)
 end
+
+
 
 --[[---------------------------------------------------------
     Name: SetPlayerXP
@@ -50,9 +60,12 @@ end
 -----------------------------------------------------------]]
 function meta:SetPlayerXP(xp)
     if ( not self:IsPlayer() ) then return end
+    if ( not xp or not isnumber(xp) ) then return end
 
     SLS.setPlayerXP(self, xp)
 end
+
+
 
 --[[---------------------------------------------------------
     Name: IsPlayerLevelEqualTo
@@ -60,10 +73,11 @@ end
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelEqualTo(level)
     if ( not self:IsPlayer() ) then return false end
-    if ( not isnumber(level) ) then return false end
 
-    return tonumber(self:GetPlayerLevel()) == level
+    return self:GetPlayerLevel() == level
 end
+
+
 
 --[[---------------------------------------------------------
     Name: IsPlayerLevelMoreThan
@@ -71,10 +85,11 @@ end
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelMoreThan(level)
     if ( not self:IsPlayer() ) then return false end
-    if ( not isnumber(level) ) then return false end
 
     return self:GetPlayerLevel() >= level
 end
+
+
 
 --[[---------------------------------------------------------
     Name: IsPlayerLevelLessThan
@@ -82,10 +97,11 @@ end
 -----------------------------------------------------------]]
 function meta:IsPlayerLevelLessThan(level)
     if ( not self:IsPlayer() ) then return false end
-    if ( not isnumber(level) ) then return false end
 
-    return self:GetPlayerLevel() < level
+    return self:GetPlayerLevel() <= level
 end
+
+
 
 --[[---------------------------------------------------------
     Name: IsPlayerLevelBetween
@@ -97,33 +113,31 @@ function meta:IsPlayerLevelBetween(level1, level2)
     return self:GetPlayerLevel() >= level1 and self:GetPlayerLevel() <= level2
 end
 
+
+
 --[[---------------------------------------------------------
     Name: AddXP
     Desc: Adds XP to the player
 -----------------------------------------------------------]]
 function meta:AddXP(xp)
     if ( not self:IsPlayer() ) then return false end
-    if ( not isnumber(xp) ) then return false end
 
     SLS.addXPToPlayer(self, xp)
-    return true
 end
 
 
 
 --[[---------------------------------------------------------
-    Name: AddPercentageXP
+    Name: AddPercentageXP (Obsolete, use ply:AddXP(XP*Percentage) instead)
     Desc: Adds a porcentage of XP to the player, the XP is the percentage of the total XP
 -----------------------------------------------------------]]
 function meta:AddPercentageXP(xp)
-    if ( not self:IsPlayer() ) then return false end
-    if ( not xp or isnumber(xp) ) then return false end
+    if ( not self:IsPlayer() ) then return end
 
     if xp > 1 then
         xp = xp/100
     end
 
-    local xp_total = math.Round(SLS.getLevelExp(self:GetPlayerLevel()) * xp)
+    local xp_total = math.Round(SLS.getLevelXP(self:GetPlayerLevel()) * xp)
     SLS.addXPToPlayer(self, xp_total)
-    return true
 end
