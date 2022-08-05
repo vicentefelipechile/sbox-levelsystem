@@ -6,12 +6,12 @@ sbox_ls.display_level = true
 sbox_ls.prefix = "[SBOX-LS]"
 sbox_ls.prefix_color = Color(91, 123, 227)
 
-resource.AddWorkshop("2838145642")
-
 ----------------------------------
 ------------- Convars ------------
 ----------------------------------
 if SERVER then
+resource.AddWorkshop("2838145642")
+
 util.AddNetworkString("sandbox_levelsystem_levelup")
 util.AddNetworkString("sandbox_levelsystem_menu")
 
