@@ -13,6 +13,7 @@ end
 function SLS.getPlayerXP(ply)
     local xp = tonumber(sql.Query("SELECT xp FROM " .. sbox_ls.db .. " WHERE player = " .. ply:SteamID64() .. ";")[1].xp)
     local levels = sbox_ls["levels"][SLS.getPlayerLevel(ply)]
+
     if levels == nil then SLS.setPlayerLevel(ply, #sbox_ls["levels"]) levels = #sbox_ls["levels"] end
 
     if xp > levels then
@@ -41,7 +42,7 @@ function SLS.getLevelXP(level)
 end
 
 function SLS.getData(ply, datatype)
-    return tonumber(sql.Query("SELECT " .. sql.SQLStr(datatype) .. " FROM " .. sbox_ls.db .. " WHERE player = " .. ply:SteamID64() .. ";")[1][datatype])
+    return tonumber(sql.Query("SELECT " .. datatype .. " FROM " .. sbox_ls.db .. " WHERE player = " .. ply:SteamID64() .. ";")[1][datatype])
 end
 
 function SLS.setData(ply, datatype, value)

@@ -40,6 +40,39 @@ if SERVER and not sql.TableExists(sbox_ls.db) then
     )]])
 end
 
+
+----------------------------------
+----------- Extensions -----------
+----------------------------------
+
+-- GDR
+-- https://github.com/44lr/gdr_addon
+sbox_ls.gdr_enable = false -- Enable/disable the GDR addon.
+sbox_ls.gdr_picture = "https://i.imgur.com/EKHWx6Y.png"
+sbox_ls.gdr_name = "Sandbox Level System"
+sbox_ls.gdr_message = " has reached level "
+
+-- Gmod Stats
+-- https://steamcommunity.com/sharedfiles/filedetails/?id=2829026660
+sbox_ls.gmodstats_enable = true -- Enable/Disable the gmodstats integration.
+sbox_ls.gmodstats_db = "stats_mp"
+
+-- Math Problems
+-- https://steamcommunity.com/sharedfiles/filedetails/?id=2805623775
+sbox_ls.maths_enable = false -- Enable/Disable the maths integration.
+sbox_ls.math_db = "math_points"
+
+-- MySQLOO
+-- https://github.com/FredyH/MySQLOO
+sbox_ls.mysqloo_enable = false -- Enable/Disable the mysqloo integration.
+sbox_ls.mysqloo = {
+    host = "localhost",
+    username = "root",
+    password = "",
+    database = "sbox_levelsystem",
+    port = 3306
+}
+
 ----------------------------------
 ------------ Functions -----------
 ----------------------------------
@@ -80,25 +113,3 @@ local function AddDir(dir)
     for _, v in ipairs(directories) do AddDir(dir .. v) end
 end
 AddDir("sbox-levelsystem")
-
-
-----------------------------------
------------ Extensions -----------
-----------------------------------
-
--- GDR
--- https://github.com/44lr/gdr_addon
-sbox_ls.gdr_enable = false -- Enable/disable the GDR addon.
-sbox_ls.gdr_picture = "https://i.imgur.com/EKHWx6Y.png"
-sbox_ls.gdr_name = "Sandbox Level System"
-sbox_ls.gdr_message = " has reached level "
-
--- Gmod Stats
--- https://steamcommunity.com/sharedfiles/filedetails/?id=2829026660
-sbox_ls.gmodstats_enable = true -- Enable/Disable the gmodstats integration.
-sbox_ls.gmodstats_db = "stats_mp"
-
--- Math Problems
--- https://steamcommunity.com/sharedfiles/filedetails/?id=2805623775
-sbox_ls.maths_enable = false -- Enable/Disable the maths integration.
-sbox_ls.math_db = "math_points"
