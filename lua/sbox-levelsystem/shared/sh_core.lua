@@ -101,3 +101,7 @@ end
 function SLS.XPValues(xp_type)
     return sbox_ls.xp[xp_type]
 end
+
+function SLS.getXP(xp_type)
+    return GetConVar("sbox_ls_" .. xp_type):GetInt() or 0
+end
