@@ -45,7 +45,7 @@ function SBOXLS_PERKS:Open()
             end
         end
 
-        if LocalPlayer():IsAdmin() then
+        if LocalPlayer():IsSuperAdmin() then
             local config = vgui.Create("DForm", categories)
             config:SetSize(SBOXLS_PERKS.Menu:GetWide() - 20, 40)
             config:SetName("Config")
