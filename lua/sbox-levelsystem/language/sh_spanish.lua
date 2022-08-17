@@ -13,4 +13,20 @@ sbox_ls.language["spanish"] = {
 
     ["disabled_gmodstats"] = "Gmod Stats no esta activado o no se encontro.",
     ["disabled_maths"] = "Math Questions no esta activado o no se encontro.",
+    ["disabled_perks"] = "Perks no esta activado o no se encontro.",
+
+    ["perk_need"] = "Tienes que ser nivel ",
+    ["perk_need2"] = " para tener el perk ",
+
+    ["perk_health"] = "Vida Extra",
+    ["perk_health_desc"] = "Esto te dara un bonus de vida extra, aprovecha.",
+
+    ["perk_armor"] = "Armadura Extra",
+    ["perk_armor_desc"] = "Esto te dara un bonus de armadura extra.",
+
+    ["perk_speed"] = "Velocidad Extra",
+    ["perk_speed_desc"] = "Esto te dara un bonus de velocidad extra.",
+
+    ["perk_jump"] = "Salto Extra",
+    ["perk_jump_desc"] = "Esto te dara un bonus de salto extra.",
 }

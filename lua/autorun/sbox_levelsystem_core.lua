@@ -14,6 +14,10 @@ resource.AddWorkshop("2838145642")
 
 util.AddNetworkString("sandbox_levelsystem_levelup")
 util.AddNetworkString("sandbox_levelsystem_menu")
+util.AddNetworkString("sandbox_levelsystem_perks")
+util.AddNetworkString("sandbox_levelsystem_perks_ask")
+util.AddNetworkString("sandbox_levelsystem_perks_admin")
+util.AddNetworkString("sandbox_levelsystem_perks_data")
 
 CreateConVar("sbox_ls_connections", "15", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player connects.")
 CreateConVar("sbox_ls_kills", "15", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player kills someone.")
@@ -22,6 +26,14 @@ CreateConVar("sbox_ls_chats", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of
 CreateConVar("sbox_ls_physgun", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses the physgun.")
 CreateConVar("sbox_ls_noclip", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses noclip.")
 CreateConVar("sbox_ls_npc_killed", "5", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player kills an NPC.")
+
+-- Perk Module
+CreateConVar("sbox_ls_perk_module", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Enable the perk module.")
+
+CreateConVar("sbox_ls_perk_module_health_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the health perk.")
+CreateConVar("sbox_ls_perk_module_armor_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the armor perk.")
+CreateConVar("sbox_ls_perk_module_jump_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the jump perk.")
+CreateConVar("sbox_ls_perk_module_speed_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the speed perk.")
 end
 
 if CLIENT then
@@ -62,16 +74,9 @@ sbox_ls.gmodstats_db = "stats_mp"
 sbox_ls.maths_enable = false -- Enable/Disable the maths integration.
 sbox_ls.math_db = "math_points"
 
--- MySQLOO
--- https://github.com/FredyH/MySQLOO
-sbox_ls.mysqloo_enable = false -- Enable/Disable the mysqloo integration.
-sbox_ls.mysqloo = {
-    host = "localhost",
-    username = "root",
-    password = "",
-    database = "sbox_levelsystem",
-    port = 3306
-}
+-- Perks Module
+sbox_ls.perks_enable = false -- Enable/Disable the perks module.
+sbox_ls.perks_db = "sbox_levelsystem_perks"
 
 ----------------------------------
 ------------ Functions -----------
