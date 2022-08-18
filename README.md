@@ -62,7 +62,7 @@ SLS_updatePlayerName(ply)
 ```
 
 # Global Meta Statements
-you can find all statements in [this file](https://github.com/SuperCALIENTITO/sbox-levelsystem/blob/main/lua/includes/extensions/sandbox_level/player_level.lua)
+you can find all statements in [this file](https://github.com/SuperCALIENTITO/sbox-levelsystem/blob/main/lua/sbox-levelsystem/shared/sh_meta.lua)
 
 ```lua
 ply:GetPlayerLevel()
