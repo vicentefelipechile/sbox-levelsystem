@@ -75,20 +75,24 @@ hook.Add("PlayerSpawn", "SboxLS_perksSpawn", function(ply)
 
         timer.Simple(0.01, function()
             if ply:IsPlayerLevelMoreThan(GetConVar("sbox_ls_perk_module_health_min"):GetInt()) then
+                hook.Call("playerSetUpPerks", nil, ply, "health", health)
                 ply:SetHealth(var_default[1] + health)
                 ply:SetArmor(var_default[1] + armor)
             end
             
             if ply:IsPlayerLevelMoreThan(GetConVar("sbox_ls_perk_module_armor_min"):GetInt()) then
+                hook.Call("playerSetUpPerks", nil, ply, "armor", armor)
                 ply:SetMaxHealth(var_default[1] + health)
                 ply:SetMaxArmor(var_default[1] + armor)
             end
             
             if ply:IsPlayerLevelMoreThan(GetConVar("sbox_ls_perk_module_jump_min"):GetInt()) then
+                hook.Call("playerSetUpPerks", nil, ply, "jump", jump)
                 ply:SetJumpPower(200 + jump)
             end
 
             if ply:IsPlayerLevelMoreThan(GetConVar("sbox_ls_perk_module_speed_min"):GetInt()) then
+                hook.Call("playerSetUpPerks", nil, ply, "speed", speed)
                 ply:SetRunSpeed(var_default[3] + speed)
                 ply:SetMaxSpeed(var_default[3] + speed)
             end
