@@ -22,7 +22,7 @@ a simple system that adds levels to the sandbox (may be compatible with other ga
 you can find all functions in [this file](https://github.com/SuperCALIENTITO/sbox-levelsystem/blob/main/lua/sbox-levelsystem/shared/sh_core.lua)
 
 ```lua
-SLS_getPlayerLevel(ply)
+SLS.getPlayerLevel(ply)
 
 -- returns the current level of the player,
 -- if the level exceeds the number of existing levels,
@@ -30,19 +30,19 @@ SLS_getPlayerLevel(ply)
 ```
 
 ```lua
-SLS_getPlayerXP(ply)
+SLS.getPlayerXP(ply)
 
 -- returns the player's current experience
 ```
 
 ```lua
-SLS_getLevelXP(level)
+SLS.getLevelXP(level)
 
 -- returns the amount of experience for the level
 ```
 
 ```lua
-SLS_checkPlayerDatabase(ply)
+SLS.checkPlayerDatabase(ply)
 
 -- check if the player exists in the database,
 -- if it doesn't exist, it adds it.
@@ -50,13 +50,13 @@ SLS_checkPlayerDatabase(ply)
 ```
 
 ```lua
-SLS_addXPToPlayer(ply, xp)
+SLS.addXPToPlayer(ply, xp)
 
 -- add the player an amount of XP with the xp arg
 ```
 
 ```lua
-SLS_updatePlayerName(ply)
+SLS.updatePlayerName(ply)
 
 -- update the name of the player in the database
 ```
