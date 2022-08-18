@@ -85,7 +85,7 @@ hook.Add("PlayerSpawn", "SboxLS_perksSpawn", function(ply)
             end
             
             if ply:IsPlayerLevelMoreThan(GetConVar("sbox_ls_perk_module_jump_min"):GetInt()) then
-                ply:SetJumpPower(var_default[2] + jump)
+                ply:SetJumpPower(200 + jump)
             end
 
             if ply:IsPlayerLevelMoreThan(GetConVar("sbox_ls_perk_module_speed_min"):GetInt()) then

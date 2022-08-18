@@ -20,12 +20,13 @@ function SBOXLS_PERKS:Open()
     local sW, sH = ScrW(), ScrH()
     if not IsValid(SBOXLS_PERKS.Menu) then
         SBOXLS_PERKS.Menu = vgui.Create("DFrame")
-        SBOXLS_PERKS.Menu:SetSize(sW * 0.3, sH * 0.7)
+        SBOXLS_PERKS.Menu:SetSize(sW * 0.5, sH * 0.7)
         SBOXLS_PERKS.Menu:Center()
         SBOXLS_PERKS.Menu:SetTitle("Perks")
         SBOXLS_PERKS.Menu:SetDraggable(true)
         SBOXLS_PERKS.Menu:ShowCloseButton(true)
         SBOXLS_PERKS.Menu:MakePopup()
+        SBOXLS_PERKS.Menu:SetKeyboardInputEnabled(false)
 
         local categories = vgui.Create("DCategoryList", SBOXLS_PERKS.Menu)
         categories:SetSize(SBOXLS_PERKS.Menu:GetWide() - 10, SBOXLS_PERKS.Menu:GetTall() - 50)
@@ -53,6 +54,7 @@ function SBOXLS_PERKS:Open()
             local button = vgui.Create("DCheckBoxLabel", config)
             button:SetText("Enabled")
             button:SetPos(16, 48)
+            button:SetValue(GetConVar("sbox_ls_perk_module"):GetInt())
 
             function button:OnChange(val)
                 if val then

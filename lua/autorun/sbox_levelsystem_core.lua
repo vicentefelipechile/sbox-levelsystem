@@ -9,6 +9,9 @@ sbox_ls.prefix_color = Color(91, 123, 227)
 ----------------------------------
 ------------- Convars ------------
 ----------------------------------
+
+CreateConVar("sbox_ls_perk_module", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the perk module.")
+
 if SERVER then
 resource.AddWorkshop("2838145642")
 
@@ -28,8 +31,6 @@ CreateConVar("sbox_ls_noclip", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount o
 CreateConVar("sbox_ls_npc_killed", "5", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player kills an NPC.")
 
 -- Perk Module
-CreateConVar("sbox_ls_perk_module", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Enable the perk module.")
-
 CreateConVar("sbox_ls_perk_module_health_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the health perk.")
 CreateConVar("sbox_ls_perk_module_armor_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the armor perk.")
 CreateConVar("sbox_ls_perk_module_jump_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the jump perk.")
@@ -62,7 +63,7 @@ end
 sbox_ls.gdr_enable = false -- Enable/disable the GDR addon.
 sbox_ls.gdr_picture = "https://i.imgur.com/EKHWx6Y.png"
 sbox_ls.gdr_name = "Sandbox Level System"
-sbox_ls.gdr_message = " has reached level "
+sbox_ls.gdr_message = " has level up to "
 
 -- Gmod Stats
 -- https://steamcommunity.com/sharedfiles/filedetails/?id=2829026660
