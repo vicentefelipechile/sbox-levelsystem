@@ -10,7 +10,8 @@ sbox_ls.prefix_color = Color(91, 123, 227)
 ------------- Convars ------------
 ----------------------------------
 
-CreateConVar("sbox_ls_perk_module", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the perk module.")
+CreateConVar("sbox_ls_module_perk", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the perk module.")
+CreateConVar("sbox_ls_module_credits", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the credits module.")
 
 if SERVER then
 resource.AddWorkshop("2838145642")
@@ -31,10 +32,13 @@ CreateConVar("sbox_ls_noclip", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount o
 CreateConVar("sbox_ls_npc_killed", "5", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player kills an NPC.")
 
 -- Perk Module
-CreateConVar("sbox_ls_perk_module_health_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the health perk.")
-CreateConVar("sbox_ls_perk_module_armor_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the armor perk.")
-CreateConVar("sbox_ls_perk_module_jump_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the jump perk.")
-CreateConVar("sbox_ls_perk_module_speed_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the speed perk.")
+CreateConVar("sbox_ls_module_perk_health_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the health perk.")
+CreateConVar("sbox_ls_module_perk_armor_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the armor perk.")
+CreateConVar("sbox_ls_module_perk_jump_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the jump perk.")
+CreateConVar("sbox_ls_module_perk_speed_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the speed perk.")
+
+-- Credits Module
+CreateConVar("sbox_ls_module_credits_onlevelup", 4000, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Amount of credit to given to players.")
 end
 
 if CLIENT then
@@ -69,15 +73,6 @@ sbox_ls.gdr_message = " has level up to "
 -- https://steamcommunity.com/sharedfiles/filedetails/?id=2829026660
 sbox_ls.gmodstats_enable = true -- Enable/Disable the gmodstats integration.
 sbox_ls.gmodstats_db = "stats_mp"
-
--- Math Problems
--- https://steamcommunity.com/sharedfiles/filedetails/?id=2805623775
-sbox_ls.maths_enable = false -- Enable/Disable the maths integration.
-sbox_ls.math_db = "math_points"
-
--- Perks Module
-sbox_ls.perks_enable = false -- Enable/Disable the perks module.
-sbox_ls.perks_db = "sbox_levelsystem_perks"
 
 ----------------------------------
 ------------ Functions -----------
