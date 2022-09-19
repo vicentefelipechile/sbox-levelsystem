@@ -140,7 +140,7 @@ concommand.Add("sbox_ls_perks_reload", function(ply)
     ------------------------------
     ----- Player Defined Vars ----
     ------------------------------
-    local enabled = GetConVar("sbox_ls_perks_enabled"):GetInt()
+    local enabled = GetConVar("sbox_ls_perks_enabled"):GetBool()
 
     local perk1 = GetConVar("sbox_ls_perks_health"):GetInt()
     local perk2 = GetConVar("sbox_ls_perks_armor"):GetInt()
