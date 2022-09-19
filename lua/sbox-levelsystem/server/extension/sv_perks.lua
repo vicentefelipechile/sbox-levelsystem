@@ -62,15 +62,6 @@ hook.Add("PlayerSpawn", "SboxLS_perksSpawn", function(ply)
     local jump = ply:GetNWInt("sbox_ls_perks_jump")
     local speed = ply:GetNWInt("sbox_ls_perks_speed")
 
-    net.Start("sandbox_levelsystem_perks_data")
-        net.WriteTable({
-            GetConVar("sbox_ls_perk_module_health_min"):GetInt(),
-            GetConVar("sbox_ls_perk_module_armor_min"):GetInt(),
-            GetConVar("sbox_ls_perk_module_jump_min"):GetInt(),
-            GetConVar("sbox_ls_perk_module_speed_min"):GetInt(),
-        })
-    net.Send(ply)
-
     if enabled == 1 and ( GetConVar("sbox_ls_perk_module"):GetInt() == 1 ) then
 
         timer.Simple(0.01, function()
