@@ -9,7 +9,6 @@ sbox_ls.prefix_color = Color(91, 123, 227)
 ----------------------------------
 ------------- Convars ------------
 ----------------------------------
-
 CreateConVar("sbox_ls_module_perk", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the perk module.")
 CreateConVar("sbox_ls_module_credits", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the credits module.")
 
@@ -30,15 +29,18 @@ CreateConVar("sbox_ls_chats", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of
 CreateConVar("sbox_ls_physgun", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses the physgun.")
 CreateConVar("sbox_ls_noclip", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses noclip.")
 CreateConVar("sbox_ls_npc_killed", "5", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player kills an NPC.")
-
--- Perk Module
-CreateConVar("sbox_ls_module_perk_health_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the health perk.")
-CreateConVar("sbox_ls_module_perk_armor_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the armor perk.")
-CreateConVar("sbox_ls_module_perk_jump_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the jump perk.")
-CreateConVar("sbox_ls_module_perk_speed_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the speed perk.")
+CreateConVar("sbox_ls_npc_killed", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player spawns a vehicle.")
 
 -- Credits Module
 CreateConVar("sbox_ls_module_credits_onlevelup", 4000, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Amount of credit to given to players.")
+
+-- Perk Module
+CreateConVar("sbox_ls_perk_module", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Enable the perk module.")
+
+CreateConVar("sbox_ls_perk_module_health_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the health perk.")
+CreateConVar("sbox_ls_perk_module_armor_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the armor perk.")
+CreateConVar("sbox_ls_perk_module_jump_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the jump perk.")
+CreateConVar("sbox_ls_perk_module_speed_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the speed perk.")
 end
 
 if CLIENT then
@@ -67,36 +69,45 @@ end
 sbox_ls.gdr_enable = false -- Enable/disable the GDR addon.
 sbox_ls.gdr_picture = "https://i.imgur.com/EKHWx6Y.png"
 sbox_ls.gdr_name = "Sandbox Level System"
-sbox_ls.gdr_message = " has level up to "
+sbox_ls.gdr_message = " has reached level "
 
 -- Gmod Stats
 -- https://steamcommunity.com/sharedfiles/filedetails/?id=2829026660
 sbox_ls.gmodstats_enable = true -- Enable/Disable the gmodstats integration.
 sbox_ls.gmodstats_db = "stats_mp"
 
+-- Math Problems
+-- https://steamcommunity.com/sharedfiles/filedetails/?id=2805623775
+sbox_ls.maths_enable = true -- Enable/Disable the maths integration.
+sbox_ls.math_db = "math_points"
+
 ----------------------------------
 ------------ Functions -----------
 ----------------------------------
+
+print("-----------------------------------------")
+print("---------- Sandbox Level System ---------")
+print("-----------------------------------------\n")
 
 local function AddFile(file, dir)
     local prefix = string.lower(string.Left(file, 3))
     if SERVER and (prefix == "sv_") then
         include(dir .. file)
-        print("[SBOX-LS] SERVER INCLUDE: " .. dir .. file)
+        print("[SBOX-LS] SERVER INCLUDE:  " .. string.sub(dir, 18) .. file)
     elseif (prefix == "sh_") then
         if SERVER then
             AddCSLuaFile(dir .. file)
-            print("[SBOX-LS] SHARED ADDCS: " .. dir .. file)
+            print("[SBOX-LS] SHARED ADDCS:    " .. string.sub(dir, 18) .. file)
         end
         include(dir .. file)
-        print("[SBOX-LS] SHARED INCLUDE: " .. dir .. file)
+        print("[SBOX-LS] SHARED INCLUDE:  " .. string.sub(dir, 18) .. file)
     elseif (prefix == "cl_") then
         if SERVER then
             AddCSLuaFile(dir .. file)
-            print("[SBOX-LS] CLIENT ADDCS: " .. dir .. file)
+            print("[SBOX-LS] CLIENT ADDCS:    " .. string.sub(dir, 18) .. file)
         elseif CLIENT then
             include(dir .. file)
-            print("[SBOX-LS] CLIENT INCLUDE: " .. dir .. file)
+            print("[SBOX-LS] CLIENT INCLUDE:  " .. string.sub(dir, 18) .. file)
         end
     end
 end
@@ -114,3 +125,6 @@ local function AddDir(dir)
     for _, v in ipairs(directories) do AddDir(dir .. v) end
 end
 AddDir("sbox-levelsystem")
+
+print("\n- Made by vicentefelipechile and Lugent -")
+print("-----------------------------------------\n")
