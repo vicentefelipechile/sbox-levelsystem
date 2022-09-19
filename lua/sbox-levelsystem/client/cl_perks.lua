@@ -48,7 +48,7 @@ function SBOXLS_PERKS:Open()
             local button = vgui.Create("DCheckBoxLabel", config)
             button:SetText("Enabled")
             button:SetPos(16, 48)
-            button:SetValue(GetConVar("sbox_ls_perk_module"):GetInt())
+            button:SetValue(GetConVar("sbox_ls_module_perk"):GetInt())
 
             function button:OnChange(val)
                 if val then
