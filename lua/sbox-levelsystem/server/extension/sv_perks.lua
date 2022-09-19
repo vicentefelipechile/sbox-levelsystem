@@ -11,7 +11,7 @@ net.Receive("sandbox_levelsystem_perks", function(_, ply)
     local data = net.ReadTable()
     PrintTable(data)
 
-    if data[1] and ( GetConVar("sbox_ls_perk_module"):GetInt() == 1 ) then
+    if data[1] and ( GetConVar("sbox_ls_module_perk"):GetInt() == 1 ) then
         ply:SetNWInt("sbox_ls_perks_enabled", 1)
 
         ply:SetNWInt("sbox_ls_perks_health", data[2])
