@@ -8,8 +8,6 @@ hook.Add("PlayerInitialSpawn", "SboxLS_connection", function(ply)
 
     ply:SetNWInt("sbox_ls_level", SLS.getPlayerLevel(ply))
     ply:SetNWInt("sbox_ls_xp", SLS.getPlayerXP(ply))
-
-	return
 end)
 ----------------------------------
 -------------- Kills -------------
@@ -30,8 +28,6 @@ hook.Add("PlayerDeath", "SboxLS_Death", function(victim, inflictor, attacker)
         attacker:SetNWInt("sbox_ls_level", SLS.getPlayerLevel(attacker))
         attacker:SetNWInt("sbox_ls_xp", SLS.getPlayerXP(attacker))
 	end
-
-	return
 end)
 
 ----------------------------------
@@ -44,8 +40,6 @@ hook.Add("PlayerSay", "SboxLS_Chat", function(ply)
 
     ply:SetNWInt("sbox_ls_level", SLS.getPlayerLevel(ply))
     ply:SetNWInt("sbox_ls_xp", SLS.getPlayerXP(ply))
-
-    return
 end)
 
 ----------------------------------
@@ -60,8 +54,6 @@ hook.Add("PhysgunPickup", "SboxLS_Physgun", function(ply, ent)
         ply:SetNWInt("sbox_ls_level", SLS.getPlayerLevel(ply))
         ply:SetNWInt("sbox_ls_xp", SLS.getPlayerXP(ply))
     end
-
-    return
 end)
 
 ----------------------------------
@@ -74,12 +66,10 @@ hook.Add("PlayerNoClip", "SboxLS_Noclip", function(ply)
 
     ply:SetNWInt("sbox_ls_level", SLS.getPlayerLevel(ply))
     ply:SetNWInt("sbox_ls_xp", SLS.getPlayerXP(ply))
-
-    return
 end)
 
 ----------------------------------
---------- NPC Killed ---------
+----------- NPC Killed -----------
 ----------------------------------
 hook.Add("OnNPCKilled", "SboxLS_NPCKilled", function(npc, attacker, inflictor)
     if inflictor:IsPlayer() and ( npc:IsNPC() or npc:IsNextBot() ) then
@@ -90,6 +80,16 @@ hook.Add("OnNPCKilled", "SboxLS_NPCKilled", function(npc, attacker, inflictor)
         attacker:SetNWInt("sbox_ls_level", SLS.getPlayerLevel(attacker))
         attacker:SetNWInt("sbox_ls_xp", SLS.getPlayerXP(attacker))
     end
+end)
 
-    return
+----------------------------------
+--------- Vehicle Spawned --------
+----------------------------------
+hook.Add("PlayerSpawnedVehicle", "SboxLS_SpawnedVehicle", function(ply)
+    SLS.checkPlayerDatabase(ply)
+    SLS.addXPToPlayer(ply, SLS.getVar("spawned_vehicles"))
+    SLS.updatePlayerName(ply)
+
+    ply:SetNWInt("sbox_ls_level", SLS.getPlayerLevel(ply))
+    ply:SetNWInt("sbox_ls_xp", SLS.getPlayerXP(ply))
 end)

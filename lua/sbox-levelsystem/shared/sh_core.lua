@@ -56,19 +56,19 @@ function SLS.addXPToPlayer(ply, xp)
 
     if xp > xp_total then
         SLS.setPlayerXP(ply, xp-xp_total)
-        hook.Call("onPlayerGetXP", nil, ply, xp-xp_total)
+        hook.Run("onPlayerGetXP", ply, xp-xp_total)
 
         if #sbox_ls["levels"] > level then
-            SLS.setPlayerLevel(ply, level+1)
-            hook.Call("onPlayerLevelUp", nil, ply, level+1)
+            SLS.setData(ply, "level", level+1)
+            hook.Run("onPlayerLevelUp", ply, level+1)
         else
-            SLS.setPlayerLevel(ply, level)
-            SLS.setPlayerXP(ply, 0)
-            hook.Call("onPlayerLevelUp", nil, ply, level)
+            SLS.setData(ply, "level", level)
+            SLS.setData(ply, "xp", 0)
+            hook.Run("onPlayerLevelUp",  ply, level)
         end
 
     else
-        hook.Call("onPlayerGetXP", nil, ply, xp)
+        hook.Run("onPlayerGetXP", ply, xp)
         SLS.setPlayerXP(ply, xp)
     end
 end
@@ -77,7 +77,7 @@ end
 ----------- Validators -----------
 ----------------------------------
 function SLS.updatePlayerName(ply)
-    sql.Query("UPDATE " .. sbox_ls.db .. " SET name = " .. sql.SQLStr(ply:Nick()) .. " WHERE player = " .. ply:SteamID64() .. ";")
+    SLS.setData(ply, "plyname", ply:Nick())
 end
 
 function SLS.checkPlayerDatabase(ply)
