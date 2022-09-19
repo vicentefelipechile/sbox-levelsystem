@@ -9,12 +9,6 @@ CreateClientConVar("sbox_ls_perks_speed", "0", true, false, "Amount of extra spe
 surface.CreateFont("sbox_ls_perks_Title", {font = "Tahoma",size = 24,weight = 500,antialias = true,shadow = false})
 surface.CreateFont("sbox_ls_perks_Desc", {font = "Tahoma",size = 16,weight = 500,antialias = true,shadow = false})
 
-SBOXLS_PERKS.item = {50,50,100,100}
-
-net.Receive("sandbox_levelsystem_perks_data", function()
-    SBOXLS_PERKS.item = net.ReadTable()
-end)
-
 
 function SBOXLS_PERKS:Open()
     local sW, sH = ScrW(), ScrH()
@@ -74,7 +68,7 @@ function SBOXLS_PERKS:Open()
         perk1:SetSize(SBOXLS_PERKS.Menu:GetWide() - 20, 40)
         perk1:SetName(SLS.GetLanguage("perk_health"))
         perk1:Help(SLS.GetLanguage("perk_health_desc"))
-        perk1:Help(SLS.GetLanguage("perk_need") .. SBOXLS_PERKS.item[1] .. SLS.GetLanguage("perk_need2") .. SLS.GetLanguage("perk_health"))
+        perk1:Help(SLS.GetLanguage("perk_need") .. GetConVar("sbox_ls_module_perk_health_min"):GetInt() .. SLS.GetLanguage("perk_need2") .. SLS.GetLanguage("perk_health"))
         perk1:NumSlider(SLS.GetLanguage("perk_health"), "sbox_ls_perks_health", 0, 100, 0)
 
         function perk1:OnValueChanged(val)
@@ -85,7 +79,7 @@ function SBOXLS_PERKS:Open()
         perk2:SetSize(SBOXLS_PERKS.Menu:GetWide() - 20, 40)
         perk2:SetName(SLS.GetLanguage("perk_armor"))
         perk2:Help(SLS.GetLanguage("perk_armor_desc"))
-        perk2:Help(SLS.GetLanguage("perk_need") .. SBOXLS_PERKS.item[2] .. SLS.GetLanguage("perk_need2") .. SLS.GetLanguage("perk_armor"))
+        perk2:Help(SLS.GetLanguage("perk_need") .. GetConVar("sbox_ls_module_perk_armor_min"):GetInt() .. SLS.GetLanguage("perk_need2") .. SLS.GetLanguage("perk_armor"))
         perk2:NumSlider(SLS.GetLanguage("perk_armor"), "sbox_ls_perks_armor", 0, 100, 0)
 
         function perk2:OnValueChanged(val)
@@ -96,7 +90,7 @@ function SBOXLS_PERKS:Open()
         perk3:SetSize(SBOXLS_PERKS.Menu:GetWide() - 20, 40)
         perk3:SetName(SLS.GetLanguage("perk_jump"))
         perk3:Help(SLS.GetLanguage("perk_jump_desc"))
-        perk3:Help(SLS.GetLanguage("perk_need") .. SBOXLS_PERKS.item[3] .. SLS.GetLanguage("perk_need2") .. SLS.GetLanguage("perk_jump"))
+        perk3:Help(SLS.GetLanguage("perk_need") .. GetConVar("sbox_ls_module_perk_jump_min"):GetInt() .. SLS.GetLanguage("perk_need2") .. SLS.GetLanguage("perk_jump"))
         perk3:NumSlider(SLS.GetLanguage("perk_jump"), "sbox_ls_perks_jump", 0, 100, 0)
 
         function perk3:OnValueChanged(val)
@@ -107,7 +101,7 @@ function SBOXLS_PERKS:Open()
         perk4:SetSize(SBOXLS_PERKS.Menu:GetWide() - 20, 40)
         perk4:SetName(SLS.GetLanguage("perk_speed"))
         perk4:Help(SLS.GetLanguage("perk_speed_desc"))
-        perk4:Help(SLS.GetLanguage("perk_need") .. SBOXLS_PERKS.item[4] .. SLS.GetLanguage("perk_need2") .. SLS.GetLanguage("perk_speed"))
+        perk4:Help(SLS.GetLanguage("perk_need") .. GetConVar("sbox_ls_module_perk_speed_min"):GetInt() .. SLS.GetLanguage("perk_need2") .. SLS.GetLanguage("perk_speed"))
         perk4:NumSlider(SLS.GetLanguage("perk_speed"), "sbox_ls_perks_speed", 0, 200, 0)
 
         function perk4:OnValueChanged(val)

@@ -50,9 +50,7 @@ resource.AddWorkshop("2838145642")
 util.AddNetworkString("sandbox_levelsystem_levelup")
 util.AddNetworkString("sandbox_levelsystem_menu")
 util.AddNetworkString("sandbox_levelsystem_perks")
-util.AddNetworkString("sandbox_levelsystem_perks_ask")
 util.AddNetworkString("sandbox_levelsystem_perks_admin")
-util.AddNetworkString("sandbox_levelsystem_perks_data")
 end
 
 if CLIENT then
