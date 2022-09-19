@@ -9,8 +9,40 @@ sbox_ls.prefix_color = Color(91, 123, 227)
 ----------------------------------
 ------------- Convars ------------
 ----------------------------------
-CreateConVar("sbox_ls_module_perk", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the perk module.")
-CreateConVar("sbox_ls_module_credits", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the credits module.")
+
+CreateConVar("sbox_ls_connections", 15, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player connects.")
+CreateConVar("sbox_ls_kills", 15, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player kills someone.")
+CreateConVar("sbox_ls_deaths", 3, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player dies.")
+CreateConVar("sbox_ls_chats", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player talks.")
+CreateConVar("sbox_ls_physgun", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player uses the physgun.")
+CreateConVar("sbox_ls_noclip", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player uses noclip.")
+CreateConVar("sbox_ls_npc_killed", 5, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player kills an NPC.")
+CreateConVar("sbox_ls_spawned_vehicle", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player spawns a vehicle.")
+CreateConVar("sbox_ls_spawned_npc", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player spawns a npc.")
+CreateConVar("sbox_ls_spawned_prop", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player spawns a prop.")
+CreateConVar("sbox_ls_spawned_sent", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player spawns a SENT.")
+CreateConVar("sbox_ls_spawned_ragdoll", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player spawns a ragdoll.")
+
+------------------------
+---- Credits Module ----
+------------------------
+CreateConVar("sbox_ls_module_credits", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the credits module.")
+CreateConVar("sbox_ls_module_credits_onlevelup", 4000, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Amount of credit to given to players.")
+
+------------------------
+----- Maths Module -----
+------------------------
+CreateConVar("sbox_ls_module_maths", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the maths module.")
+CreateConVar("sbox_ls_module_maths_answered", 20, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Amount of xp to given to players.")
+
+------------------------
+------ Perk Module -----
+------------------------
+CreateConVar("sbox_ls_module_perk", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the perk module.")
+CreateConVar("sbox_ls_module_perk_health_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the health perk.")
+CreateConVar("sbox_ls_module_perk_armor_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the armor perk.")
+CreateConVar("sbox_ls_module_perk_jump_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the jump perk.")
+CreateConVar("sbox_ls_module_perk_speed_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the speed perk.")
 
 if SERVER then
 resource.AddWorkshop("2838145642")
@@ -21,32 +53,12 @@ util.AddNetworkString("sandbox_levelsystem_perks")
 util.AddNetworkString("sandbox_levelsystem_perks_ask")
 util.AddNetworkString("sandbox_levelsystem_perks_admin")
 util.AddNetworkString("sandbox_levelsystem_perks_data")
-
-CreateConVar("sbox_ls_connections", "15", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player connects.")
-CreateConVar("sbox_ls_kills", "15", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player kills someone.")
-CreateConVar("sbox_ls_deaths", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player dies.")
-CreateConVar("sbox_ls_chats", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player talks.")
-CreateConVar("sbox_ls_physgun", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses the physgun.")
-CreateConVar("sbox_ls_noclip", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player uses noclip.")
-CreateConVar("sbox_ls_npc_killed", "5", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player kills an NPC.")
-CreateConVar("sbox_ls_npc_killed", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The amount of xp to get when a player spawns a vehicle.")
-
--- Credits Module
-CreateConVar("sbox_ls_module_credits_onlevelup", 4000, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Amount of credit to given to players.")
-
--- Perk Module
-CreateConVar("sbox_ls_perk_module", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Enable the perk module.")
-
-CreateConVar("sbox_ls_perk_module_health_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the health perk.")
-CreateConVar("sbox_ls_perk_module_armor_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the armor perk.")
-CreateConVar("sbox_ls_perk_module_jump_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the jump perk.")
-CreateConVar("sbox_ls_perk_module_speed_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The level minimum to get the speed perk.")
 end
 
 if CLIENT then
-CreateClientConVar("sbox_ls_notify", "1", true, true, "Should the player be notified when they level up?")
-CreateClientConVar("sbox_ls_notify_sound", "1", true, true, "Should the player be notified with a sound when they level up?")
-CreateClientConVar("sbox_ls_notify_chat", "0", true, true, "Should the player be notified with a chat message when they level up?")
+CreateClientConVar("sbox_ls_notify", 1, true, true, "Should the player be notified when they level up?")
+CreateClientConVar("sbox_ls_notify_sound", 1, true, true, "Should the player be notified with a sound when they level up?")
+CreateClientConVar("sbox_ls_notify_chat", 0, true, true, "Should the player be notified with a chat message when they level up?")
 end
 
 if SERVER and not sql.TableExists(sbox_ls.db) then

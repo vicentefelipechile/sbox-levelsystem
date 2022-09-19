@@ -73,6 +73,15 @@ function SLS.addXPToPlayer(ply, xp)
     end
 end
 
+function SLS.simpleAddXp(ply, val)
+    SLS.checkPlayerDatabase(ply)
+    SLS.addXPToPlayer(ply, SLS.getVar(val))
+    SLS.updatePlayerName(ply)
+    
+    ply:SetNWInt("sbox_ls_level", SLS.getPlayerLevel(ply))
+    ply:SetNWInt("sbox_ls_xp", SLS.getPlayerXP(ply))
+end
+
 ----------------------------------
 ----------- Validators -----------
 ----------------------------------
