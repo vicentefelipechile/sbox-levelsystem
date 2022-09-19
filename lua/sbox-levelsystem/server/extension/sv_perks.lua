@@ -49,9 +49,9 @@ net.Receive("sandbox_levelsystem_perks_admin", function(_, ply)
     local data = net.ReadBool()
 
     if data then
-        RunConsoleCommand("sbox_ls_perk_module", "1")
+        RunConsoleCommand("sbox_ls_module_perk", "1")
     else
-        RunConsoleCommand("sbox_ls_perk_module", "0")
+        RunConsoleCommand("sbox_ls_module_perk", "0")
     end
 end)
 
@@ -62,7 +62,7 @@ hook.Add("PlayerSpawn", "SboxLS_perksSpawn", function(ply)
     local jump = ply:GetNWInt("sbox_ls_perks_jump")
     local speed = ply:GetNWInt("sbox_ls_perks_speed")
 
-    if enabled == 1 and ( GetConVar("sbox_ls_perk_module"):GetInt() == 1 ) then
+    if enabled == 1 and ( GetConVar("sbox_ls_module_perk"):GetInt() == 1 ) then
 
         timer.Simple(0.01, function()
             if ply:IsPlayerLevelMoreThan(GetConVar("sbox_ls_perk_module_health_min"):GetInt()) then
