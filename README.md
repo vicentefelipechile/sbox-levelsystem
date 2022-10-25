@@ -10,6 +10,12 @@ a simple system that adds levels to the sandbox (may be compatible with other ga
 | sbox_ls_chats         | 1     | The amount of xp to get when a player talks.              |
 | sbox_ls_physgun       | 2     | The amount of xp to get when a player uses the physgun.   |
 | sbox_ls_noclip        | 2     | The amount of xp to get when a player uses noclip.        |
+| sbox_ls_npc_killed    | 5     | The amount of xp to get when a player kills an NPC.       |
+| sbox_ls_spawned_vehicle| 2    | The amount of xp to get when a player spawns a vehicle.   |
+| sbox_ls_spawned_npc   | 2     | The amount of xp to get when a player spawns a NPC.       |
+| sbox_ls_spawned_prop  | 1     | The amount of xp to get when a player spawns a prop.      |
+| sbox_ls_spawned_sent  | 2     | The amount of xp to get when a player spawns a SENT.      |
+| sbox_ls_spawned_ragdoll| 2    | The amount of xp to get when a player spawns a ragdoll.   |
 
 ### Cvars Client-side
 | CVAR                  | Value | Description   | 
