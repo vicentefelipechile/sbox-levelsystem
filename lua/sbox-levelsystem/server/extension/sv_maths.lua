@@ -1,4 +1,4 @@
-if mathQuestions.math then
+if mathQuestions then
 
     hook.Add("mathQuestionAnswered", "SboxLS_maths", function(ply)
         if GetConVar("sbox_ls_module_credits"):GetBool() then
