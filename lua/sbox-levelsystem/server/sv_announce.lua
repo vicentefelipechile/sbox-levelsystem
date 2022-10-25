@@ -7,10 +7,6 @@ hook.Add("onPlayerLevelUp", "onPlayerLevelUp", function(ply, level)
                 lvl = tostring(level),
                 name = ply:Nick()
             })
-
-        for _, v in ipairs(player.GetAll()) do
-            net.Send(v)
-        end
-
+        net.Broadcast()
     end
 end)

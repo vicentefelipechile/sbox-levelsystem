@@ -44,6 +44,13 @@ CreateConVar("sbox_ls_module_perk_armor_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY, 
 CreateConVar("sbox_ls_module_perk_jump_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the jump perk.")
 CreateConVar("sbox_ls_module_perk_speed_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the speed perk.")
 
+------------------------
+------ Pac3 Module -----
+------------------------
+CreateConVar("sbox_ls_module_pac3", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the PAC3 Module.")
+CreateConVar("sbox_ls_module_pac3_weared", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the PAC3 Module.")
+
+
 if SERVER then
 resource.AddWorkshop("2838145642")
 
