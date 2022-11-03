@@ -52,5 +52,5 @@ function SLS.resetData()
     file.Delete(dir.."config.txt")
 end
 
-concommand.Add("sbox_ls_data_check", SLS.checkData, function() end, "Check the integrity of the data inside of"..dir)
-concommand.Add("sbox_ls_data_remove", SLS.resetData, function() end, "Remove all data inside of "..dir)
+concommand.Add("sbox_ls_data_check", function() SLS.checkData() end, function() end, "Check the integrity of the data inside of"..dir)
+concommand.Add("sbox_ls_data_remove", function() SLS.resetData() end, function() end, "Remove all data inside of "..dir)
