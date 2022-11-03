@@ -38,7 +38,7 @@ function SLS.checkData()
     if not file.Exists(dir.."config.txt") then
         local data = SLS.requestData()
 
-        if not data then return
+        if not data then return end
 
         file.Write(dir.."config.txt", data)
         file.Write(dir.."readme.txt", SLS.GetLanguage("readme"))
