@@ -36,6 +36,8 @@ function SLS.checkData()
     end
 
     if not file.Exists(dir.."config.txt", "DATA") then
+        file.CreateDir(sbox_ls.dir)
+
         local data = SLS.requestData()
 
         if data then
