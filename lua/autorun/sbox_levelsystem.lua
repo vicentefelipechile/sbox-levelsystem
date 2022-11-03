@@ -8,6 +8,22 @@ sbox_ls.prefix = "[SBOX-LS]"
 sbox_ls.prefix_color = Color(91, 123, 227)
 
 ----------------------------------
+------------ Language ------------
+----------------------------------
+-- https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+sbox_ls.lang = {
+    ["en"] = "english",
+    ["es"] = "spanish",
+}
+CreateConVar("sbox_ls_lang", "en", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "The language to use for the level system.")
+
+function SLS.GetLanguage(phrase)
+    local lang = lang_table[GetConVar("sbox_ls_lang"):GetString()] or "english"
+    return sbox_ls.language[lang][phrase] or phrase
+end
+
+
+----------------------------------
 ------------- Convars ------------
 ----------------------------------
 
