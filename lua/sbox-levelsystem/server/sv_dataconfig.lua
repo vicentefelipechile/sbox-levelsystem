@@ -4,15 +4,8 @@
 
 local config = ""
 
-http.Fetch("https://raw.githubusercontent.com/SuperCALIENTITO/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
-    function(body)
-        config = body
-    end,
-
-    function(failed)
-        print("[SBOX-LS] ERROR: " .. failed)
-        print("[SBOX-LS] FAILED TO FETCH, USING BACKUP...")
-        config = [[#
+local function a()
+	return [[#
 #   XP
 #
 
@@ -52,6 +45,20 @@ gmodstats_db = "stats_mp"
 #
 
 maths_enable = true
-maths_db = "math_points"]]
-    end
+maths_db = "math_points"]] end
+
+http.Fetch("https://raw.githubusercontent.com/SuperCALIENTITO/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
+    function(body, _, _, response)
+		if response == 200 then
+			config = body
+		else
+			config = a()
+		end
+    end,
+
+    function(failed)
+        print("[SBOX-LS] ERROR: " .. failed)
+        print("[SBOX-LS] FAILED TO FETCH, USING BACKUP...")
+    end,
+	{}
 )
