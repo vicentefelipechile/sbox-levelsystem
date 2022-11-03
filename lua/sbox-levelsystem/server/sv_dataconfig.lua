@@ -12,6 +12,7 @@ function SLS.requestData()
             if response == 200 then
                 config = body
             else
+                SLS.mSV("ERROR: "..response)
                 SLS.mSV("FAILED TO FETCH, YOU CAN'T USE CONFIG")
             end
         end,
