@@ -29,4 +29,11 @@ sbox_ls.language["english"] = {
 
     ["perk_jump"] = "Extra Jump",
     ["perk_jump_desc"] = "This will give a extra jump bonus.",
+
+    ["readme"] = [[Readme file:
+
+Here you will find the configuration that you can use in case you do not want
+use the commands to edit some server options,
+Variables only available within the code are also included.
+of the addon.]],
 }

@@ -29,4 +29,11 @@ sbox_ls.language["spanish"] = {
 
     ["perk_jump"] = "Salto Extra",
     ["perk_jump_desc"] = "Esto te dara un bonus de salto extra.",
+
+    ["readme"] = [[Archivo Readme:
+
+Aqui encontraras la configuracion que puedes usar en caso de no querer
+usar los comandos para editar algunas opciones del servidor,
+Tambien se incluyen variables solo disponibles dentro del codigo
+del addon.]],
 }

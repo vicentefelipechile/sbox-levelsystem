@@ -82,7 +82,7 @@ end
 ----------------------------------
 
 -- GDR
--- https://github.com/44lr/gdr_addon
+-- https://github.com/SuperCALIENTITO/gdr_addon
 sbox_ls.gdr_enable = false -- Enable/disable the GDR addon.
 sbox_ls.gdr_picture = "https://i.imgur.com/EKHWx6Y.png"
 sbox_ls.gdr_name = "Sandbox Level System"
