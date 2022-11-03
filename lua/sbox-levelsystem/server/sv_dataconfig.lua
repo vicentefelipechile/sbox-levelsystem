@@ -2,63 +2,54 @@
 ------- HTTP Fetch -------
 --------------------------
 
-local config = ""
+local dir = sbox_ls.dir .. "/"
 
-local function a()
-	return [[#
-#   XP
-#
+function SLS.requestData()
+    local config = ""
 
-sbox_ls_connections = 15
-sbox_ls_kills = 15
-sbox_ls_deaths = 3
-sbox_ls_chats = 1
-sbox_ls_physgun = 2
-sbox_ls_noclip = 2
-sbox_ls_npc_killed = 2
-sbox_ls_spawned_npc = 2
-sbox_ls_spawned_prop = 1
-sbox_ls_spawned_sent = 2
-sbox_ls_spawned_ragdoll = 2
+    http.Fetch("https://raw.githubusercontent.com/SuperCALIENTITO/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
+        function(body, _, _, response)
+            if response == 200 then
+                config = body
+            else
+                SLS.mSV("FAILED TO FETCH, YOU CAN'T USE CONFIG")
+            end
+        end,
 
+        function(failed)
+            SLS.mSV("ERROR: " .. failed)
+        end,
+        {}
+    )
 
-#
-#   GDR - https://github.com/SuperCALIENTITO/gdr_addon
-#
+    return config
+end
 
-gdr_enable = false
-gdr_picture = "https://i.imgur.com/EKHWx6Y.png"
-gdr_name = "Sandbox Level System"
-gdr_message = " has reached level "
+--------------------------
+------- Data Write -------
+--------------------------
 
+function SLS.checkData()
+    if file.IsDir(sbox_ls.dir) and file.Exists(dir.."config.txt") then
+        SLS.mSV("Data is correct, eureka!")
+    end
 
-#
-#   Gmod Stats - https://steamcommunity.com/sharedfiles/filedetails/?id=2829026660
-#
+    if not file.Exists(dir.."config.txt") then
+        local data = SLS.requestData()
 
-gmodstats_enable = true
-gmodstats_db = "stats_mp"
+        if not data then return
 
+        file.Write(dir.."config.txt", data)
+        file.Write(dir.."readme.txt", SLS.GetLanguage("readme"))
+    end
+end
 
-#
-#   Math problems - https://steamcommunity.com/sharedfiles/filedetails/?id=2805623775
-#
+SLS.checkData()
 
-maths_enable = true
-maths_db = "math_points"]] end
+function SLS.resetData()
+    file.Delete(dir.."readme.txt")
+    file.Delete(dir.."config.txt")
+end
 
-http.Fetch("https://raw.githubusercontent.com/SuperCALIENTITO/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
-    function(body, _, _, response)
-		if response == 200 then
-			config = body
-		else
-			config = a()
-		end
-    end,
-
-    function(failed)
-        print("[SBOX-LS] ERROR: " .. failed)
-        print("[SBOX-LS] FAILED TO FETCH, USING BACKUP...")
-    end,
-	{}
-)
+concommand.Add("sbox_ls_data_check", SLS.checkData, function() end, "Check the integrity of the data inside of"..dir)
+concommand.Add("sbox_ls_data_remove", SLS.resetData, function() end, "Remove all data inside of "..dir)

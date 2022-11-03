@@ -2,6 +2,7 @@ SLS = {}
 sbox_ls = {}
 sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
+sbox_ls.dir = "sbox-levelsystem"
 sbox_ls.display_level = true
 sbox_ls.prefix = "[SBOX-LS]"
 sbox_ls.prefix_color = Color(91, 123, 227)
@@ -102,6 +103,19 @@ sbox_ls.math_db = "math_points"
 ------------ Functions -----------
 ----------------------------------
 
+function SLS.mSV(str)
+    MsgC( Color(56, 228, 255, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), tostring(str))
+end
+
+function SLS.mCL(str)
+    MsgC( Color(255, 235, 56, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), tostring(str))
+end
+
+function SLS.mSH(str)
+    MsgC( Color(167, 255, 167, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), tostring(str))
+end
+
+
 print("-----------------------------------------")
 print("---------- Sandbox Level System ---------")
 print("-----------------------------------------\n")
@@ -110,21 +124,26 @@ local function AddFile(file, dir)
     local prefix = string.lower(string.Left(file, 3))
     if SERVER and (prefix == "sv_") then
         include(dir .. file)
-        print("[SBOX-LS] SERVER INCLUDE:  " .. string.sub(dir, 18) .. file)
+        SLS.mSV("SERVER INCLUDE:  " .. string.sub(dir, 18) .. file)
+        --print("[SBOX-LS] SERVER INCLUDE:  " .. string.sub(dir, 18) .. file)
     elseif (prefix == "sh_") then
         if SERVER then
             AddCSLuaFile(dir .. file)
-            print("[SBOX-LS] SHARED ADDCS:    " .. string.sub(dir, 18) .. file)
+            SLS.mSH("SHARED ADDCS:    " .. string.sub(dir, 18) .. file)
+            --print("[SBOX-LS] SHARED ADDCS:    " .. string.sub(dir, 18) .. file)
         end
         include(dir .. file)
-        print("[SBOX-LS] SHARED INCLUDE:  " .. string.sub(dir, 18) .. file)
+        SLS.mSH("SHARED INCLUDE:  " .. string.sub(dir, 18) .. file)
+        --print("[SBOX-LS] SHARED INCLUDE:  " .. string.sub(dir, 18) .. file)
     elseif (prefix == "cl_") then
         if SERVER then
             AddCSLuaFile(dir .. file)
-            print("[SBOX-LS] CLIENT ADDCS:    " .. string.sub(dir, 18) .. file)
+            SLS.mCL("CLIENT ADDCS:    " .. string.sub(dir, 18) .. file)
+            --print("[SBOX-LS] CLIENT ADDCS:    " .. string.sub(dir, 18) .. file)
         elseif CLIENT then
             include(dir .. file)
-            print("[SBOX-LS] CLIENT INCLUDE:  " .. string.sub(dir, 18) .. file)
+            SLS.mCL("CLIENT INCLUDE:  " .. string.sub(dir, 18) .. file)
+            --print("[SBOX-LS] CLIENT INCLUDE:  " .. string.sub(dir, 18) .. file)
         end
     end
 end
