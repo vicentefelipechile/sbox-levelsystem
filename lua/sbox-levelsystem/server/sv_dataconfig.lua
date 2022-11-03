@@ -53,7 +53,7 @@ function SLS.checkData()
     end
 end
 
-SLS.checkData()
+
 
 function SLS.resetData()
     file.Delete(dir.."readme.txt")
@@ -70,3 +70,5 @@ end
 concommand.Add("sbox_ls_data_check", function() SLS.checkData() end, function() end, "Check the integrity of the data inside in "..sbox_ls.dir)
 concommand.Add("sbox_ls_data_reset", function() SLS.resetData() end, function() end, "Reset to factory all data inside in "..sbox_ls.dir)
 concommand.Add("sbox_ls_data_remove", function() SLS.removeData() end, function() end, "Remove all data inside in "..sbox_ls.dir)
+
+timer.Simple(6, function() return file.Exists(dir.."config.txt", "DATA") or SLS.checkData() end)
