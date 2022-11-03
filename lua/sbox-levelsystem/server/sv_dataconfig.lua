@@ -52,7 +52,14 @@ SLS.checkData()
 function SLS.resetData()
     file.Delete(dir.."readme.txt")
     file.Delete(dir.."config.txt")
+
+    SLS.checkData()
 end
 
-concommand.Add("sbox_ls_data_check", function() SLS.checkData() end, function() end, "Check the integrity of the data inside of"..dir)
-concommand.Add("sbox_ls_data_remove", function() SLS.resetData() end, function() end, "Remove all data inside of "..dir)
+function SLS.removeData()
+    file.Delete(sbox_ls.dir)
+    file.CreateDir(sbox_ls.dir)
+end
+
+concommand.Add("sbox_ls_data_check", function() SLS.checkData() end, function() end, "Check the integrity of the data inside of "..sbox_ls.dir)
+concommand.Add("sbox_ls_data_remove", function() SLS.resetData() end, function() end, "Remove all data inside of "..sbox_ls.dir)
