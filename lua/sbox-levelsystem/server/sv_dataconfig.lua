@@ -67,3 +67,21 @@ concommand.Add("sbox_ls_data_reset", function() SLS.resetData() end, function() 
 concommand.Add("sbox_ls_data_remove", function() SLS.removeData() end, function() end, "Remove all data inside in "..sbox_ls.dir)
 
 timer.Simple(12, function() SLS.checkData() end)
+
+--------------------------
+-------- Data Read -------
+--------------------------
+
+local dataConfig = file.Open(dir.."config.txt", "rb", "DATA")
+local sbox_vars = {}
+local modules_vars = {}
+
+while not dataConfig:EndOfFile() do
+    local line = tostring(dataConfig:ReadLine())
+
+    if string.StartWith(line, "#") then continue end
+    
+    if line == "" then continue end
+
+    print(line)
+end
