@@ -45,6 +45,12 @@ function SLS.checkData()
             file.Write(dir.."readme.txt", SLS.GetLanguage("readme"))
         end
     end
+
+    if file.Read(dir.."config.txt", "DATA") == "" then
+        local data = SLS.requestData()
+
+        file.Write(dir.."config.txt", data)
+    end
 end
 
 SLS.checkData()
