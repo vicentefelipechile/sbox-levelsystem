@@ -2,8 +2,6 @@
 ------- HTTP Fetch -------
 --------------------------
 
-local dir = sbox_ls.dir .. "/"
-
 function SLS.requestData()
     local config = ""
 
@@ -29,6 +27,8 @@ end
 --------------------------
 ------- Data Write -------
 --------------------------
+
+local dir = sbox_ls.dir .. "/"
 
 function SLS.checkData()
     if file.IsDir(sbox_ls.dir) and file.Exists(dir.."config.txt") then
