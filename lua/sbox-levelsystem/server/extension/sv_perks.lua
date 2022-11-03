@@ -10,8 +10,8 @@ local var_default = {
 net.Receive("sandbox_levelsystem_perks", function(_, ply)
     local data = net.ReadTable()
 
-    if data[1] and ( GetConVar("sbox_ls_module_perk"):GetInt() == 1 ) then
-        ply:SetNWInt("sbox_ls_perks_enabled", 1)
+    if data[1] and GetConVar("sbox_ls_module_perk"):GetBool() then
+        ply:SetNWBool("sbox_ls_perks_enabled", true)
 
         ply:SetNWInt("sbox_ls_perks_health", data[2])
         ply:SetNWInt("sbox_ls_perks_armor", data[3])
@@ -35,7 +35,7 @@ net.Receive("sandbox_levelsystem_perks", function(_, ply)
             ply:SetMaxSpeed(var_default[3] + data[4])
         end
     else
-        ply:SetNWInt("sbox_ls_perks_enabled", 0)
+        ply:SetNWBool("sbox_ls_perks_enabled", false)
 
         ply:SetMaxHealth(var_default[1])
         ply:SetMaxArmor(var_default[1])
@@ -56,13 +56,13 @@ net.Receive("sandbox_levelsystem_perks_admin", function(_, ply)
 end)
 
 hook.Add("PlayerSpawn", "SboxLS_perksSpawn", function(ply)
-    local enabled = ply:GetNWInt("sbox_ls_perks_enabled")
+    local enabled = ply:GetNWBool("sbox_ls_perks_enabled")
     local health = ply:GetNWInt("sbox_ls_perks_health")
     local armor = ply:GetNWInt("sbox_ls_perks_armor")
     local jump = ply:GetNWInt("sbox_ls_perks_jump")
     local speed = ply:GetNWInt("sbox_ls_perks_speed")
 
-    if enabled == 1 and ( GetConVar("sbox_ls_module_perk"):GetInt() == 1 ) then
+    if enabled == 1 and GetConVar("sbox_ls_module_perk"):GetBool() then
 
         timer.Simple(0.01, function()
             if ply:IsPlayerLevelMoreThan(GetConVar("sbox_ls_module_perk_health_min"):GetInt()) then
