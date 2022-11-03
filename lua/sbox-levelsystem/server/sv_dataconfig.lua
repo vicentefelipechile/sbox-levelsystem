@@ -83,5 +83,7 @@ while not dataConfig:EndOfFile() do
     
     if line == "" then continue end
 
+    if not string.find(line, "=") then continue end
+
     print(line)
 end
