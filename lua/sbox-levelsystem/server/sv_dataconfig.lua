@@ -31,7 +31,7 @@ end
 local dir = sbox_ls.dir .. "/"
 
 function SLS.checkData()
-    if file.IsDir(sbox_ls.dir) and file.Exists(dir.."config.txt") then
+    if file.IsDir(sbox_ls.dir, "DATA") and file.Exists(dir.."config.txt") then
         SLS.mSV("Data is correct, eureka!")
     end
 
