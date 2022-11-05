@@ -114,3 +114,7 @@ end
 function SLS.getVar(xp_type)
     return GetConVar("sbox_ls_" .. xp_type):GetInt() or 0
 end
+
+function SLS.typeVar(var)
+    return tobool(var) ~= nil and tobool(var) or tonumber(var) ~= nil and tonumber(var) or tostring(var)
+end
