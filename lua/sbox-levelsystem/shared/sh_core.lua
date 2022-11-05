@@ -116,5 +116,13 @@ function SLS.getVar(xp_type)
 end
 
 function SLS.typeVar(var)
-    return tobool(var) ~= nil and tobool(var) or tonumber(var) ~= nil and tonumber(var) or tostring(var)
+    if tonumber(var) then
+        return tonumber(var)
+    end
+
+    if tobool(var) then
+        return tobool(var)
+    end
+
+    return tostring(var)
 end
