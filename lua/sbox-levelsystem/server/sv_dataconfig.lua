@@ -78,12 +78,17 @@ local modules_vars = {}
 
 while not dataConfig:EndOfFile() do
     local line = tostring(dataConfig:ReadLine())
+    local lineStart, lineEnd = string.find(line, "=") 
 
     if string.StartWith(line, "#") then continue end
-    
+
     if line == "" then continue end
 
-    if not string.find(line, "=") then continue end
+    if not lineStart then continue end
 
-    print(line)
+    local var, value = string.sub(line, 0, lineEnd - 2), string.sub(line, lineStart + 2, -2)
+
+    print(var,value)
 end
+
+dataConfig:Close()
