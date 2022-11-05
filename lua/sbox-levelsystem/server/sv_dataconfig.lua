@@ -72,23 +72,45 @@ timer.Simple(12, function() SLS.checkData() end)
 -------- Data Read -------
 --------------------------
 
-local dataConfig = file.Open(dir.."config.txt", "rb", "DATA")
-local sbox_vars = {}
-local modules_vars = {}
+function SLS.requestData()
+    local dataConfig = file.Open(dir.."config.txt", "rb", "DATA")
+    local tbl = {}
+    
+    while not dataConfig:EndOfFile() do
+        local line = tostring(dataConfig:ReadLine())
+        local lineStart, lineEnd = string.find(line, "=") 
+    
+        if string.StartWith(line, "#") then continue end
+    
+        if line == "" then continue end
+    
+        if not lineStart then continue end
+    
+        if string.find(line, "#") then
+            local a = string.find(line, "#")
+            line = string.sub(line, 0, a - 1)
+        end
+    
+        local var, value = string.sub(line, 0, lineEnd - 2), string.sub(line, lineStart + 2, -2)
+    
+        tbl[var] = value
+    end
+    
+    dataConfig:Close()
 
-while not dataConfig:EndOfFile() do
-    local line = tostring(dataConfig:ReadLine())
-    local lineStart, lineEnd = string.find(line, "=") 
-
-    if string.StartWith(line, "#") then continue end
-
-    if line == "" then continue end
-
-    if not lineStart then continue end
-
-    local var, value = string.sub(line, 0, lineEnd - 2), string.sub(line, lineStart + 2, -2)
-
-    print(var,value)
+    return tbl
+    
 end
 
-dataConfig:Close()
+function SLS.asyncData(convar)
+    if not convar then
+        for var, value in pairs(SLS.requestData()) do
+            if ConVarExists(var) and string.StartWith(var, "sbox_ls_") then
+                local v = tobool(value) ~= nil and tobool(value) or tonumber(value) ~= nil and tonumber(value) or tostring(value)
+    
+                print(v)
+            end
+        end
+    else
+    end
+end
