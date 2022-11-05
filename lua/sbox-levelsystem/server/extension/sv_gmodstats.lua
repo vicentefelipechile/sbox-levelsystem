@@ -17,7 +17,6 @@ function SLS_ext_GetGmodStats(ply)
     end
 
     local xp = xp_deaths + xp_kills + xp_connections + xp_chat + xp_noclip
-    print(xp)
 
     local level = 1
     local xp_level = 0
