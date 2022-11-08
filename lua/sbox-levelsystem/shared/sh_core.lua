@@ -11,18 +11,18 @@ function SLS.getPlayerLevel(ply)
 end
 
 function SLS.getPlayerXP(ply)
-    local xp = tonumber(sql.Query("SELECT xp FROM " .. sbox_ls.db .. " WHERE player = " .. ply:SteamID64() .. ";")[1].xp)
-    local levels = sbox_ls["levels"][SLS.getPlayerLevel(ply)]
+    if not ply:IsPlayer() then return 1
 
-    if levels == nil then SLS.setPlayerLevel(ply, #sbox_ls["levels"]) levels = #sbox_ls["levels"] end
+    local xp = tonumber( sql.Query("SELECT xp FROM " .. sbox_ls.db .. " WHERE player = " .. ply:SteamID64() .. ";")[1].xp )
+    local lv = sbox_ls.levels[SLS.getPlayerLevel(ply)]
 
-    if xp > levels then
-        return levels-100
-    elseif xp < 0 then
-        return 1
-    else
-        return xp
+    if not lv then
+        SLS.setPlayerLevel(ply, #sbox_ls.levels)
+        lv = #sbox_ls.levels
     end
+
+    return  xp > levels and levels-100  or  xp < 0 and 1  or  xp
+
 end
 
 function SLS.setPlayerLevel(ply, level)
@@ -34,11 +34,7 @@ function SLS.setPlayerXP(ply, xp)
 end
 
 function SLS.getLevelXP(level)
-    if ( #sbox_ls["levels"] > level ) then
-        return tonumber(sbox_ls["levels"][level])
-    else
-        return tonumber(sbox_ls["levels"][#sbox_ls["levels"]])
-    end
+    return #sbox_ls.levels > level and sbox_ls.levels[level]  or  sbox_ls.levels[#sbox_ls[level]]
 end
 
 function SLS.getData(ply, datatype)
@@ -77,7 +73,7 @@ function SLS.simpleAddXp(ply, val)
     SLS.checkPlayerDatabase(ply)
     SLS.addXPToPlayer(ply, SLS.getVar(val))
     SLS.updatePlayerName(ply)
-    
+
     ply:SetNWInt("sbox_ls_level", SLS.getPlayerLevel(ply))
     ply:SetNWInt("sbox_ls_xp", SLS.getPlayerXP(ply))
 end
@@ -97,14 +93,9 @@ function SLS.checkPlayerDatabase(ply)
 end
 
 function SLS.levelExists(level)
-    if not level then return false end
-    if not isnumber(level) then return false end
+    if not level or isnumber(level) then return nil end
 
-    if #sbox_ls["levels"] > level and level >= 1 then
-        return true
-    else
-        return false
-    end
+    return #sbox_ls["levels"] > level and level >= 1
 end
 
 function SLS.XPValues(xp_type)
@@ -113,16 +104,4 @@ end
 
 function SLS.getVar(xp_type)
     return GetConVar("sbox_ls_" .. xp_type):GetInt() or 0
-end
-
-function SLS.typeVar(var)
-    if tonumber(var) then
-        return tonumber(var)
-    end
-
-    if tobool(var) then
-        return tobool(var)
-    end
-
-    return tostring(var)
 end
