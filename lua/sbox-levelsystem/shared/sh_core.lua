@@ -19,7 +19,7 @@ function SLS.getPlayerXP(ply)
         lv = #sbox_ls.levels
     end
 
-    return  xp > levels and lv-100  or  xp < 0 and 1  or  xp
+    return  xp > lv and lv-100  or  xp < 0 and 1  or  xp
 
 end
 
