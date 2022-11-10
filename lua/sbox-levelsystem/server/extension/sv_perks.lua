@@ -9,10 +9,10 @@ SLS.perks_default = {
 
 net.Receive("sandbox_levelsystem_perks", function(_, ply)
     local enabled = net.ReadBool()
-    local perk1 = net.ReadInt()
-    local perk2 = net.ReadInt()
-    local perk3 = net.ReadInt()
-    local perk4 = net.ReadInt()
+    local perk1 = net.ReadInt(16)
+    local perk2 = net.ReadInt(16)
+    local perk3 = net.ReadInt(16)
+    local perk4 = net.ReadInt(16)
 
     if enabled and GetConVar("sbox_ls_module_perk"):GetBool() then
         ply:SetNWBool("sbox_ls_perks_enabled", true)
