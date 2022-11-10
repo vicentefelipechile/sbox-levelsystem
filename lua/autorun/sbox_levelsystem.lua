@@ -60,6 +60,7 @@ CreateConVar("sbox_ls_module_perk_health_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY,
 CreateConVar("sbox_ls_module_perk_armor_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the armor perk.")
 CreateConVar("sbox_ls_module_perk_jump_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the jump perk.")
 CreateConVar("sbox_ls_module_perk_speed_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the speed perk.")
+CreateConVar("sbox_ls_module_perk_delay", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Delay to apply changes to the player")
 
 ------------------------
 ------ Pac3 Module -----

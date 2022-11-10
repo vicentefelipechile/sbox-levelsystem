@@ -148,7 +148,11 @@ concommand.Add("sbox_ls_perks_reload", function(ply)
     local perk4 = GetConVar("sbox_ls_perks_speed"):GetInt()
 
     net.Start("sandbox_levelsystem_perks") 
-        net.WriteTable({enabled, perk1, perk2, perk3, perk4})
+        net.WriteBool(enabled)
+        net.WriteInt(perk1)
+        net.WriteInt(perk2)
+        net.WriteInt(perk3)
+        net.WriteInt(perk4)
     net.SendToServer()
 end)
 
