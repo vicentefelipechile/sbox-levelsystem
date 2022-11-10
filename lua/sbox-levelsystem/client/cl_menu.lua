@@ -82,7 +82,7 @@ function SBOXLS_Menu:Open()
 
 end
 
-function SBOXLS_PERKS:Close()
+function SBOXLS_Menu:Close()
     if IsValid(SBOXLS_Menu.Frame) then
         SBOXLS_Menu.Frame:Close()
     end

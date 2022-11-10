@@ -11,7 +11,7 @@ function SLS.getPlayerLevel(ply)
 end
 
 function SLS.getPlayerXP(ply)
-    if not ply:IsPlayer() then return 1
+    if not ply:IsPlayer() then return 1 end
 
     local xp = tonumber( sql.Query("SELECT xp FROM " .. sbox_ls.db .. " WHERE player = " .. ply:SteamID64() .. ";")[1].xp )
     local lv = sbox_ls.levels[SLS.getPlayerLevel(ply)]
