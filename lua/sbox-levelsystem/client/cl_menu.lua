@@ -92,7 +92,7 @@ concommand.Add("sbox_ls_menu", function(ply)
     SBOXLS_Menu:Open()
 end)
 
-hook.Add("OnPlayerChat", "SboxLS_perksMenu", function(ply, text)
+hook.Add("OnPlayerChat", "SboxLS_Menu", function(ply, text)
     if string.lower(text) == "!level" and ply == LocalPlayer() then
         ply:ConCommand("sbox_ls_menu")
     end
