@@ -73,18 +73,21 @@ you can find all statements in [this file](https://github.com/SuperCALIENTITO/sb
 ```lua
 ply:GetPlayerLevel()
 
+-- (Integer)
 -- returns the player level
 ```
 
 ```lua
 ply:GetPlayerXP()
 
+-- (Integer)
 -- returns the current xp of player
 ```
 
 ```lua
 ply:GetPlayerXPToNextLevel()
 
+-- (Integer)
 -- returns the amount needed to level up
 ```
 
