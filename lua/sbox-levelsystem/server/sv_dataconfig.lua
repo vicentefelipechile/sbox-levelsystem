@@ -117,11 +117,11 @@ function SLS.asyncData(convar)
         for var, value in pairs(tbl) do
             if ConVarExists(var) and string.StartWith(var, "sbox_ls_") then
     
-                print(GetConVar(var), value)
+                SLS.mSV(GetConVar(var), value)
 
             elseif sbox_ls[var] then
 
-                print(var, SLS.checkVal(value))
+                SLS.mSV(var, SLS.checkVal(value))
 
             end
         end
@@ -137,7 +137,3 @@ function SLS.asyncData(convar)
         return true, tbl[convar]
     end
 end
-
-cvars.AddChangeCallback("sbox_ls_config", function(convar, old, new)
-    if 
-end)
