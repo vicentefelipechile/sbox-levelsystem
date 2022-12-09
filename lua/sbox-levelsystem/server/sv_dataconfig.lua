@@ -50,6 +50,9 @@ function SLS.checkData()
     if not file.Exists(dir.."config.txt", "DATA") then
         file.CreateDir(sbox_ls.dir)
         file.Write(dir.."config.txt", "")
+
+        SLS.httpData()
+
         file.Write(dir.."readme.txt", SLS.GetLanguage("readme"))
     end
 end
@@ -74,13 +77,18 @@ local function checkVal(val)
     end
 
     if string.StartWith(val, "Color(") and string.EndsWith(val, ")") then
-        return "color", string.sub(val, 7, -2)
+        local tbl, rgb = {}, {}
+        for num in string.gmatch(val, "%d+") do table.insert(tbl, tonumber(num)) end
+        rgb.r = tbl[1] rgb.g = tbl[2] rgb.b = tbl[3]
+        return "color", rgb
     end
 
     if tonumber(val) then return "number" end
 
     return "string"
 end
+
+SLS.checkVal = checkVal
 
 local Trim = string.Trim
 local Find = string.find
@@ -114,12 +122,14 @@ function SLS.requestData()
 
         if sbox_ls.var_blacklist[var] then continue end
 
-        if checkVal(value) == "bool" then
+        local valType, rgb = checkVal(value)
+
+        if valType == "bool" then
             value = tobool(value)
-        elseif checkVal(value) == "number" then
+        elseif valType == "number" then
             value = tonumber(value)
-        elseif checkVal(value) == "color" then
-            value = string.ToColor(value)
+        elseif valType == "color" then
+            value = Color(rgb.r, rgb.g, rgb.b)
         end
     
         tbl[var] = value
@@ -145,6 +155,10 @@ function SLS.asyncData(convar)
 
             elseif sbox_ls[var] then
 
+                if errorFallback then
+                    sbox_ls[var] = value
+                end
+
                 SLS.mSV(var, "\t", value)
 
             end
@@ -168,7 +182,7 @@ end
 
 concommand.Add("sbox_ls_config_check", function() SLS.checkData() end, function() end, "Check the integrity of the data inside in "..sbox_ls.dir)
 concommand.Add("sbox_ls_config_reset", function() SLS.resetData() end, function() end, "Reset to factory all data inside in "..sbox_ls.dir)
-concommand.Add("sbox_ls_config_remove", function() SLS.removeData() end, function() end, "Remove all data inside in "..sbox_ls.dir)
+concommand.Add("sbox_ls_config_remove", function() SLS.deleteData() end, function() end, "Remove all data inside in "..sbox_ls.dir)
 concommand.Add("sbox_ls_config_reload", function() SLS.requestData() end, function() end, "Flush and reload the config")
 
 timer.Simple(10, function() SLS.checkData() end)
@@ -176,6 +190,7 @@ timer.Simple(10, function() SLS.checkData() end)
 cvars.AddChangeCallback("sbox_ls_config", function(convar, old, new)
     if new == ( "1" or 1 ) then
         errorFallback = true
+        SLS.mSV("You are now allowed to change main core settings of the addon")
     else
         errorFallback = false
     end
