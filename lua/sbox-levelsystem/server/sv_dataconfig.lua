@@ -134,7 +134,7 @@ function SLS.asyncData(convar)
             return true, GetConVar(convar)
         end
 
-        if sbox_ls[convar] 
+        return true, tbl[convar]
     end
 end
 
