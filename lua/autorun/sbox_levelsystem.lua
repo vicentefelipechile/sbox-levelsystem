@@ -27,40 +27,44 @@ end
 ------------- Convars ------------
 ----------------------------------
 
-CreateConVar("sbox_ls_connections", 15, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player connects.")
-CreateConVar("sbox_ls_kills", 15, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player kills someone.")
-CreateConVar("sbox_ls_deaths", 3, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player dies.")
-CreateConVar("sbox_ls_chats", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player talks.")
-CreateConVar("sbox_ls_physgun", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player uses the physgun.")
-CreateConVar("sbox_ls_noclip", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player uses noclip.")
-CreateConVar("sbox_ls_npc_killed", 5, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player kills an NPC.")
-CreateConVar("sbox_ls_spawned_vehicle", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player spawns a vehicle.")
-CreateConVar("sbox_ls_spawned_npc", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player spawns a npc.")
-CreateConVar("sbox_ls_spawned_prop", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player spawns a prop.")
-CreateConVar("sbox_ls_spawned_sent", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player spawns a SENT.")
-CreateConVar("sbox_ls_spawned_ragdoll", 2, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The amount of xp to get when a player spawns a ragdoll.")
+local function addCV(str, int, desc)
+    CreateConVar(str, int, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, desc)
+end
+
+addCV("sbox_ls_connections",    15,"The amount of xp to get when a player connects.")
+addCV("sbox_ls_kills",          15,"The amount of xp to get when a player kills someone.")
+addCV("sbox_ls_deaths",          3,"The amount of xp to get when a player dies.")
+addCV("sbox_ls_chats",           1,"The amount of xp to get when a player talks.")
+addCV("sbox_ls_physgun",         2,"The amount of xp to get when a player uses the physgun.")
+addCV("sbox_ls_noclip",          2,"The amount of xp to get when a player uses noclip.")
+addCV("sbox_ls_npc_killed",      5,"The amount of xp to get when a player kills an NPC.")
+addCV("sbox_ls_spawned_vehicle", 2,"The amount of xp to get when a player spawns a vehicle.")
+addCV("sbox_ls_spawned_npc",     2,"The amount of xp to get when a player spawns a npc.")
+addCV("sbox_ls_spawned_prop",    1,"The amount of xp to get when a player spawns a prop.")
+addCV("sbox_ls_spawned_sent",    2,"The amount of xp to get when a player spawns a SENT.")
+addCV("sbox_ls_spawned_ragdoll", 2,"The amount of xp to get when a player spawns a ragdoll.")
 
 ------------------------
 ---- Credits Module ----
 ------------------------
-CreateConVar("sbox_ls_module_credits", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the credits module.")
-CreateConVar("sbox_ls_module_credits_onlevelup", 4000, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Amount of credit to given to players.")
+addCV("sbox_ls_module_credits",  0,"Enable the credits module.")
+addCV("sbox_ls_module_credits_onlevelup", 4000,"Amount of credit to given to players.")
 
 ------------------------
 ----- Maths Module -----
 ------------------------
-CreateConVar("sbox_ls_module_maths", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the maths module.")
-CreateConVar("sbox_ls_module_maths_answered", 20, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Amount of xp to given to players.")
+addCV("sbox_ls_module_maths",    0,"Enable the maths module.")
+addCV("sbox_ls_module_maths_answered", 20,"Amount of xp to given to players.")
 
 ------------------------
 ------ Perk Module -----
 ------------------------
-CreateConVar("sbox_ls_module_perk", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Enable the perk module.")
-CreateConVar("sbox_ls_module_perk_health_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the health perk.")
-CreateConVar("sbox_ls_module_perk_armor_min", 50, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the armor perk.")
-CreateConVar("sbox_ls_module_perk_jump_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the jump perk.")
-CreateConVar("sbox_ls_module_perk_speed_min", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "The level minimum to get the speed perk.")
-CreateConVar("sbox_ls_module_perk_delay", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Delay to apply changes to the player")
+addCV("sbox_ls_module_perk",                  0,"Enable the perk module.")
+addCV("sbox_ls_module_perk_health_min",      50,"The level minimum to get the health perk.")
+addCV("sbox_ls_module_perk_armor_min",       50,"The level minimum to get the armor perk.")
+addCV("sbox_ls_module_perk_jump_min",       100,"The level minimum to get the jump perk.")
+addCV("sbox_ls_module_perk_speed_min",      100,"The level minimum to get the speed perk.")
+addCV("sbox_ls_module_perk_delay",            1,"Delay to apply changes to the player")
 
 
 if SERVER then
@@ -136,25 +140,20 @@ local function AddFile(file, dir)
     if SERVER and (prefix == "sv_") then
         include(dir .. file)
         SLS.mSV("SERVER INCLUDE:  " .. string.sub(dir, 18) .. file)
-        --print("[SBOX-LS] SERVER INCLUDE:  " .. string.sub(dir, 18) .. file)
     elseif (prefix == "sh_") then
         if SERVER then
             AddCSLuaFile(dir .. file)
             SLS.mSH("SHARED ADDCS:    " .. string.sub(dir, 18) .. file)
-            --print("[SBOX-LS] SHARED ADDCS:    " .. string.sub(dir, 18) .. file)
         end
         include(dir .. file)
         SLS.mSH("SHARED INCLUDE:  " .. string.sub(dir, 18) .. file)
-        --print("[SBOX-LS] SHARED INCLUDE:  " .. string.sub(dir, 18) .. file)
     elseif (prefix == "cl_") then
         if SERVER then
             AddCSLuaFile(dir .. file)
             SLS.mCL("CLIENT ADDCS:    " .. string.sub(dir, 18) .. file)
-            --print("[SBOX-LS] CLIENT ADDCS:    " .. string.sub(dir, 18) .. file)
         elseif CLIENT then
             include(dir .. file)
             SLS.mCL("CLIENT INCLUDE:  " .. string.sub(dir, 18) .. file)
-            --print("[SBOX-LS] CLIENT INCLUDE:  " .. string.sub(dir, 18) .. file)
         end
     end
 end

@@ -5,7 +5,9 @@
 function SLS.requestData()
     local config = ""
 
-    http.Fetch("https://raw.githubusercontent.com/SuperCALIENTITO/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
+    HTTP({
+        method =    "GET",
+        url =       "https://raw.githubusercontent.com/SuperCALIENTITO/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
         function(body, _, _, response)
             if response == 200 then
                 file.Write(sbox_ls.dir .. "/config.txt", body)
@@ -20,8 +22,8 @@ function SLS.requestData()
         function(failed)
             SLS.mSV("ERROR: " .. failed)
         end,
-        {}
-    )
+
+    })
 
     return config
 end
@@ -106,9 +108,11 @@ function SLS.asyncData(convar)
     if not convar then
         for var, value in pairs(SLS.requestData()) do
             if ConVarExists(var) and string.StartWith(var, "sbox_ls_") then
-                local v = tobool(value) ~= nil and tobool(value) or tonumber(value) ~= nil and tonumber(value) or tostring(value)
-    
-                print(v)
+                local valType = SLS.checkVal(var)
+
+                print(var, valType)
+            elseif sbox_ls[var] then
+                print(var, sbox_ls[var])
             end
         end
     else

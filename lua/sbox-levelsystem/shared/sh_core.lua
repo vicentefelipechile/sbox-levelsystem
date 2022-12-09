@@ -103,3 +103,10 @@ end
 function SLS.getVar(xp_type)
     return GetConVar("sbox_ls_" .. xp_type):GetInt() or 0
 end
+
+function SLS.checkVal(val)
+    if tobool(val) then return "bool" end
+    if tonumber(val) then return "number" end
+
+    return "string"
+end
