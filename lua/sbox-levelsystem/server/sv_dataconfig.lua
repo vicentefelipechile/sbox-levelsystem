@@ -112,7 +112,7 @@ function SLS.asyncData(convar)
     if not convar then
         for var, value in pairs(SLS.requestData()) do
             if ConVarExists(var) and string.StartWith(var, "sbox_ls_") then
-                local valType = SLS.checkVal(var)
+                local valType = SLS.checkVal(value)
 
                 print(var, valType)
             elseif sbox_ls[var] then

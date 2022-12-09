@@ -105,8 +105,11 @@ function SLS.getVar(xp_type)
 end
 
 function SLS.checkVal(val)
-    if isbool(val) then return "bool" end
-    if isnumber(val) then return "number" end
+    if ( val == false or val == "false" or val == true or val == "true" ) then
+        return "bool"
+    end
+
+    if tonumber(val) then return "number" end
 
     return "string"
 end
