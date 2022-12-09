@@ -2,10 +2,10 @@
 #   Sandbox Level System
 #
 
-db = "sbox_levelsystem"     # Database Name
-dir = "sbox-levelsystem"    # Data Directory Name
+db = sbox_levelsystem     # Database Name
+dir = sbox-levelsystem    # Data Directory Name
 display_level = true        # Display level?
-prefix = "[SBOX-LS]"        # Prefix Name
+prefix = [SBOX-LS]        # Prefix Name
 prefix_color = Color("91 123 227") # Color RGB
 
 
@@ -51,9 +51,9 @@ sbox_ls_module_credits_onlevelup = 4000
 #
 
 gdr_enable = false
-gdr_picture = "https://i.imgur.com/EKHWx6Y.png"
-gdr_name = "Sandbox Level System"
-gdr_message = " has reached level "
+gdr_picture = https://i.imgur.com/EKHWx6Y.png
+gdr_name = Sandbox Level System
+gdr_message = has reached level
 
 
 #
@@ -61,7 +61,7 @@ gdr_message = " has reached level "
 #
 
 gmodstats_enable = true
-gmodstats_db = "stats_mp"
+gmodstats_db = stats_mp
 
 
 #
@@ -69,4 +69,4 @@ gmodstats_db = "stats_mp"
 #
 
 maths_enable = true
-maths_db = "math_points"
+maths_db = math_points

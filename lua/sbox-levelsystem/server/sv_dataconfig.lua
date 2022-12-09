@@ -144,23 +144,28 @@ end
 
 local errorFallback = false
 
-function SLS.asyncData(convar)
+function SLS.asyncData(convar, broadcast, ply)
     local tbl = SLS.requestData()
+
+    if broadcast or ply then
+        
+        local json = util.TableToJSON(tbl)
+        local compress = util.Compress(json)
+        local bytes = #compress
+
+        net.Start("sandbox_levelsystem_config")
+            net.WriteUInt( bytes, 16 )
+            net.WriteData( compress, bytes )
+        if ply then net.Send(ply) else net.Broadcast() end
+
+    end
 
     if not convar then
         for var, value in pairs(tbl) do
-            if ConVarExists(var) and string.StartWith(var, "sbox_ls_") then
-    
-                SLS.mSV(GetConVar(var), "\t", value)
-
-            elseif sbox_ls[var] then
-
+            if sbox_ls[var] then
                 if errorFallback then
                     sbox_ls[var] = value
                 end
-
-                SLS.mSV(var, "\t", value)
-
             end
         end
 
@@ -187,10 +192,20 @@ concommand.Add("sbox_ls_config_reload", function() SLS.requestData() end, functi
 
 timer.Simple(10, function() SLS.checkData() end)
 
+hook.Add("PostGamemodeLoaded", "SboxLS_ConfigPost", function()
+    SLS.asyncData(_, true)
+end)
+
+hook.Add("PlayerInitialSpawn", "SboxLS_ConfigInit", function(ply)
+    SLS.asyncData(_, _, ply)
+end)
+
 cvars.AddChangeCallback("sbox_ls_config", function(convar, old, new)
     if new == ( "1" or 1 ) then
         errorFallback = true
         SLS.mSV("You are now allowed to change main core settings of the addon")
+
+        SLS.asyncData(_, true)
     else
         errorFallback = false
     end
