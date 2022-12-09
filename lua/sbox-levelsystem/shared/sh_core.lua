@@ -109,7 +109,7 @@ function SLS.checkVal(val)
         return "bool"
     end
 
-    if IsColor( string.ToColor(val) ) then return "color"
+    if IsColor( string.ToColor(val) ) then return "color" end
 
     if tonumber(val) then return "number" end
 

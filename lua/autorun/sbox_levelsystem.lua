@@ -1,5 +1,6 @@
 SLS = {}
 sbox_ls = {}
+sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
 sbox_ls.dir = "sbox-levelsystem"
 sbox_ls.display_level = true
@@ -8,6 +9,7 @@ sbox_ls.prefix_color = Color(91, 123, 227)
 
 sbox_ls.var_blacklist = {
     ["var_blacklist"] = true,
+    ["language"] = true,
     ["lang"] = true,
 }
 
