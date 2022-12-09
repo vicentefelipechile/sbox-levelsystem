@@ -2,30 +2,28 @@
 ------- HTTP Fetch -------
 --------------------------
 
-function SLS.requestData()
-    local config = ""
+function SLS.httpData()
 
     HTTP({
-        method =    "GET",
-        url =       "https://raw.githubusercontent.com/SuperCALIENTITO/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
-        function(response, body)
+        method      = "get",
+        url         = "https://raw.githubusercontent.com/SuperCALIENTITO/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
+        headers     = {},
+
+        success     = function(response, body, headers)
             if response == 200 then
                 file.Write(sbox_ls.dir .. "/config.txt", body)
                 SLS.mSV("Data has been restored")
-                config = response
             else
                 SLS.mSV("ERROR: "..response)
                 SLS.mSV("FAILED TO FETCH, YOU CAN'T USE CONFIG")
             end
         end,
 
-        function(failed)
+        failed      = function(failed)
             SLS.mSV("ERROR: " .. failed)
-        end,
-
+        end
     })
 
-    return config
 end
 
 --------------------------
@@ -35,18 +33,24 @@ end
 local dir = sbox_ls.dir .. "/"
 
 function SLS.checkData()
+
+    if file.Read(dir.."config.txt", "DATA") == "" then
+        SLS.httpData()
+    end
+
     if file.IsDir(sbox_ls.dir, "DATA") and file.Exists(dir.."config.txt", "DATA") then
-        SLS.mSV("Data is correct, eureka!")
+        if not ( file.Read(dir.."config.txt", "DATA") == "" ) then
+            SLS.mSV("Data is correct, eureka!")
+        else
+            SLS.mSV("Something is wrong with the Data")
+            SLS.mSV("Maybe it is empty?")
+        end
     end
 
     if not file.Exists(dir.."config.txt", "DATA") then
         file.CreateDir(sbox_ls.dir)
         file.Write(dir.."config.txt", "")
         file.Write(dir.."readme.txt", SLS.GetLanguage("readme"))
-    end
-
-    if file.Read(dir.."config.txt", "DATA") == "" then
-        SLS.requestData()
     end
 end
 
@@ -68,7 +72,7 @@ concommand.Add("sbox_ls_data_check", function() SLS.checkData() end, function() 
 concommand.Add("sbox_ls_data_reset", function() SLS.resetData() end, function() end, "Reset to factory all data inside in "..sbox_ls.dir)
 concommand.Add("sbox_ls_data_remove", function() SLS.removeData() end, function() end, "Remove all data inside in "..sbox_ls.dir)
 
-timer.Simple(12, function() SLS.checkData() end)
+timer.Simple(3, function() SLS.checkData() end)
 
 --------------------------
 -------- Data Read -------
