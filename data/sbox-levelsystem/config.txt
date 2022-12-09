@@ -1,4 +1,15 @@
 #
+#   Sandbox Level System
+#
+
+db = "sbox_levelsystem"     # Database Name
+dir = "sbox-levelsystem"    # Data Directory Name
+display_level = true        # Display level?
+prefix = "[SBOX-LS]"        # Prefix Name
+prefix_color = "91, 123, 227" # Color 
+
+
+#
 #   XP
 #
 
@@ -14,8 +25,9 @@ sbox_ls_spawned_prop = 1
 sbox_ls_spawned_sent = 2
 sbox_ls_spawned_ragdoll = 2
 
-
+#
 # Perk Module
+#
 
 sbox_ls_module_perk = 0
 sbox_ls_module_perk_armor_min = 50
@@ -23,17 +35,15 @@ sbox_ls_module_perk_health_min = 50
 sbox_ls_module_perk_jump_min = 100
 sbox_ls_module_perk_speed_min = 100
 
-
+#
 # Other Modules
+#
 
 sbox_ls_module_maths = 0
 sbox_ls_module_maths_answered = 20
 
 sbox_ls_module_credits = 0
 sbox_ls_module_credits_onlevelup = 4000
-
-sbox_ls_module_pac3 = 0
-sbox_ls_module_pac3_weared = 2
 
 
 #

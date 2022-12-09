@@ -72,7 +72,7 @@ concommand.Add("sbox_ls_data_check", function() SLS.checkData() end, function() 
 concommand.Add("sbox_ls_data_reset", function() SLS.resetData() end, function() end, "Reset to factory all data inside in "..sbox_ls.dir)
 concommand.Add("sbox_ls_data_remove", function() SLS.removeData() end, function() end, "Remove all data inside in "..sbox_ls.dir)
 
-timer.Simple(3, function() SLS.checkData() end)
+timer.Simple(10, function() SLS.checkData() end)
 
 --------------------------
 -------- Data Read -------
@@ -94,10 +94,12 @@ function SLS.requestData()
     
         if string.find(line, "#") then
             local a = string.find(line, "#")
-            line = string.sub(line, 0, a - 1)
+            line = string.Trim( string.sub(line, 0, a - 1) )
         end
     
         local var, value = string.sub(line, 0, lineEnd - 2), string.sub(line, lineStart + 2, -2)
+
+        if sbox_ls.var_blacklist[var] then continue end
     
         tbl[var] = value
     end
@@ -109,16 +111,33 @@ function SLS.requestData()
 end
 
 function SLS.asyncData(convar)
-    if not convar then
-        for var, value in pairs(SLS.requestData()) do
-            if ConVarExists(var) and string.StartWith(var, "sbox_ls_") then
-                local valType = SLS.checkVal(value)
+    local tbl = SLS.requestData()
 
-                print(var, valType)
+    if not convar then
+        for var, value in pairs(tbl) do
+            if ConVarExists(var) and string.StartWith(var, "sbox_ls_") then
+    
+                print(GetConVar(var), value)
+
             elseif sbox_ls[var] then
-                print(var, sbox_ls[var])
+
+                print(var, SLS.checkVal(value))
+
             end
         end
+
+        return true, 1
     else
+        if not tbl[convar] then return false, nil end
+
+        if ConVarExists(convar) then
+            return true, GetConVar(convar)
+        end
+
+        if sbox_ls[convar] 
     end
 end
+
+cvars.AddChangeCallback("sbox_ls_config", function(convar, old, new)
+    if 
+end)

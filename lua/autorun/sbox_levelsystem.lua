@@ -1,11 +1,15 @@
 SLS = {}
 sbox_ls = {}
-sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
 sbox_ls.dir = "sbox-levelsystem"
 sbox_ls.display_level = true
 sbox_ls.prefix = "[SBOX-LS]"
 sbox_ls.prefix_color = Color(91, 123, 227)
+
+sbox_ls.var_blacklist = {
+    ["var_blacklist"] = true,
+    ["lang"] = true,
+}
 
 ----------------------------------
 ------------ Language ------------
@@ -43,6 +47,12 @@ addCV("sbox_ls_spawned_npc",     2,"The amount of xp to get when a player spawns
 addCV("sbox_ls_spawned_prop",    1,"The amount of xp to get when a player spawns a prop.")
 addCV("sbox_ls_spawned_sent",    2,"The amount of xp to get when a player spawns a SENT.")
 addCV("sbox_ls_spawned_ragdoll", 2,"The amount of xp to get when a player spawns a ragdoll.")
+
+------------------------
+----- Config Module ----
+------------------------
+
+addCV("sbox_ls_config",          0, "Use the config file instead of convars?")
 
 ------------------------
 ---- Credits Module ----
