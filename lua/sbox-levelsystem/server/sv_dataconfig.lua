@@ -8,7 +8,7 @@ function SLS.requestData()
     HTTP({
         method =    "GET",
         url =       "https://raw.githubusercontent.com/SuperCALIENTITO/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
-        function(body, _, _, response)
+        function(response, body)
             if response == 200 then
                 file.Write(sbox_ls.dir .. "/config.txt", body)
                 SLS.mSV("Data has been restored")
