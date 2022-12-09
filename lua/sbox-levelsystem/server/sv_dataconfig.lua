@@ -54,18 +54,14 @@ function SLS.checkData()
     end
 end
 
-
-
-function SLS.resetData()
+function SLS.deleteData()
     file.Delete(dir.."readme.txt")
     file.Delete(dir.."config.txt")
-
-    SLS.checkData()
 end
 
-function SLS.removeData()
-    file.Delete(sbox_ls.dir)
-    file.CreateDir(sbox_ls.dir)
+function SLS.resetData()
+    SLS.deleteData()
+    SLS.checkData()
 end
 
 --------------------------
