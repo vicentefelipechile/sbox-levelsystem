@@ -101,17 +101,13 @@ function SLS.XPValues(xp_type)
 end
 
 function SLS.getVar(xp_type)
-    return GetConVar("sbox_ls_" .. xp_type):GetInt() or 0
+    return GetConVar("sbox_ls_config"):GetBool() and sbox_ls.config["sbox_ls_" .. xp_type] or GetConVar("sbox_ls_" .. xp_type):GetInt() or 0
 end
 
-function SLS.checkVal(val)
-    if ( val == false or val == "false" or val == true or val == "true" ) then
-        return "bool"
+function SLS.configVar(var)
+    if GetConVar("sbox_ls_config"):GetBool() then
+        return sbox_ls.config[var]
     end
 
-    if IsColor( string.ToColor(val) ) then return "color" end
-
-    if tonumber(val) then return "number" end
-
-    return "string"
+    return GetConVar("sbox_ls_" .. var)
 end

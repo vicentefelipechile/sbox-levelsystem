@@ -1,7 +1,7 @@
 if mathQuestions then
 
     hook.Add("mathQuestionAnswered", "SboxLS_maths", function(ply)
-        if GetConVar("sbox_ls_module_credits"):GetBool() then
+        if SLS.configVar("module_credits") then
             SLS.simpleAddXp(ply, "module_maths_answered")
         end
     end)

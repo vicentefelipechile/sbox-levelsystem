@@ -1,5 +1,6 @@
 SLS = {}
 sbox_ls = {}
+sbox_ls.config = {}
 sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
 sbox_ls.dir = "sbox-levelsystem"
@@ -10,6 +11,8 @@ sbox_ls.prefix_color = Color(91, 123, 227)
 sbox_ls.var_blacklist = {
     ["var_blacklist"] = true,
     ["language"] = true,
+    ["levels"] = true,
+    ["config"] = true,
     ["lang"] = true,
 }
 
@@ -131,15 +134,18 @@ sbox_ls.math_db = "math_points"
 ----------------------------------
 
 function SLS.mSV(...)
-    MsgC( Color(56, 228, 255, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), unpack(...), "\n")
+    MsgC( Color(56, 228, 255, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), unpack({...}))
+    MsgC("\n")
 end
 
 function SLS.mCL(...)
-    MsgC( Color(255, 235, 56, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), unpack(...), "\n")
+    MsgC( Color(255, 235, 56, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), unpack({...}))
+    MsgC("\n")
 end
 
 function SLS.mSH(...)
-    MsgC( Color(167, 255, 167, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), unpack(...), "\n")
+    MsgC( Color(167, 255, 167, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), unpack({...}))
+    MsgC("\n")
 end
 
 

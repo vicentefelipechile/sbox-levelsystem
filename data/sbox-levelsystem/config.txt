@@ -6,7 +6,7 @@ db = "sbox_levelsystem"     # Database Name
 dir = "sbox-levelsystem"    # Data Directory Name
 display_level = true        # Display level?
 prefix = "[SBOX-LS]"        # Prefix Name
-prefix_color = "91, 123, 227" # Color 
+prefix_color = Color("91 123 227") # Color RGB
 
 
 #

@@ -68,23 +68,38 @@ function SLS.removeData()
     file.CreateDir(sbox_ls.dir)
 end
 
-concommand.Add("sbox_ls_data_check", function() SLS.checkData() end, function() end, "Check the integrity of the data inside in "..sbox_ls.dir)
-concommand.Add("sbox_ls_data_reset", function() SLS.resetData() end, function() end, "Reset to factory all data inside in "..sbox_ls.dir)
-concommand.Add("sbox_ls_data_remove", function() SLS.removeData() end, function() end, "Remove all data inside in "..sbox_ls.dir)
-
-timer.Simple(10, function() SLS.checkData() end)
-
 --------------------------
 -------- Data Read -------
 --------------------------
 
+local function checkVal(val)
+    if ( val == false or val == "false" or val == true or val == "true" ) then
+        return "bool"
+    end
+
+    if string.StartWith(val, "Color(") and string.EndsWith(val, ")") then
+        return "color", string.sub(val, 7, -2)
+    end
+
+    if tonumber(val) then return "number" end
+
+    return "string"
+end
+
+local Trim = string.Trim
+local Find = string.find
+local Sub = string.sub
+
 function SLS.requestData()
     local dataConfig = file.Open(dir.."config.txt", "rb", "DATA")
+
+    if not dataConfig then return {} end
+
     local tbl = {}
     
     while not dataConfig:EndOfFile() do
         local line = tostring(dataConfig:ReadLine())
-        local lineStart, lineEnd = string.find(line, "=") 
+        local lineStart, lineEnd = Find(line, "=") 
     
         if string.StartWith(line, "#") then continue end
     
@@ -92,16 +107,27 @@ function SLS.requestData()
     
         if not lineStart then continue end
     
-        if string.find(line, "#") then
-            local a = string.find(line, "#")
-            line = string.Trim( string.sub(line, 0, a - 1) )
+        if Find(line, "#") then
+            local a = Find(line, "#")
+            line = Sub(line, 0, a - 1)
         end
+
+        line = Trim(line)
     
-        local var, value = string.sub(line, 0, lineEnd - 2), string.sub(line, lineStart + 2, -2)
+        local var, value = Trim( Sub(line, 0, lineEnd - 1) ), Trim( Sub(line, lineStart + 1) )
 
         if sbox_ls.var_blacklist[var] then continue end
+
+        if checkVal(value) == "bool" then
+            value = tobool(value)
+        elseif checkVal(value) == "number" then
+            value = tonumber(value)
+        elseif checkVal(value) == "color" then
+            value = string.ToColor(value)
+        end
     
         tbl[var] = value
+        sbox_ls.config[var] = value
     end
     
     dataConfig:Close()
@@ -110,6 +136,8 @@ function SLS.requestData()
     
 end
 
+local errorFallback = false
+
 function SLS.asyncData(convar)
     local tbl = SLS.requestData()
 
@@ -117,11 +145,11 @@ function SLS.asyncData(convar)
         for var, value in pairs(tbl) do
             if ConVarExists(var) and string.StartWith(var, "sbox_ls_") then
     
-                SLS.mSV(GetConVar(var), value)
+                SLS.mSV(GetConVar(var), "\t", value)
 
             elseif sbox_ls[var] then
 
-                SLS.mSV(var, SLS.checkVal(value))
+                SLS.mSV(var, "\t", value)
 
             end
         end
@@ -137,3 +165,22 @@ function SLS.asyncData(convar)
         return true, tbl[convar]
     end
 end
+
+--------------------------
+------- Concommands ------
+--------------------------
+
+concommand.Add("sbox_ls_config_check", function() SLS.checkData() end, function() end, "Check the integrity of the data inside in "..sbox_ls.dir)
+concommand.Add("sbox_ls_config_reset", function() SLS.resetData() end, function() end, "Reset to factory all data inside in "..sbox_ls.dir)
+concommand.Add("sbox_ls_config_remove", function() SLS.removeData() end, function() end, "Remove all data inside in "..sbox_ls.dir)
+concommand.Add("sbox_ls_config_reload", function() SLS.requestData() end, function() end, "Flush and reload the config")
+
+timer.Simple(10, function() SLS.checkData() end)
+
+cvars.AddChangeCallback("sbox_ls_config", function(convar, old, new)
+    if new == ( "1" or 1 ) then
+        errorFallback = true
+    else
+        errorFallback = false
+    end
+end)
