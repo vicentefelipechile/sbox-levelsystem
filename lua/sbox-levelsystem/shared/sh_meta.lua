@@ -32,11 +32,7 @@ end
 function meta:GetPlayerXPToNextLevel()
     if ( not self:IsPlayer() ) then return 0 end
 
-    local level = self:GetPlayerLevel()
-    local xp = self:GetPlayerXP()
-    local xp_total = SLS.getLevelXP(level)
-
-    return xp_total - xp
+    return SLS.getLevelXP( self:GetPlayerLevel() ) - self:GetPlayerXP()
 end
 
 
@@ -110,7 +106,9 @@ end
 function meta:IsPlayerLevelBetween(level1, level2)
     if ( not self:IsPlayer() ) then return false end
 
-    return self:GetPlayerLevel() >= level1 and self:GetPlayerLevel() <= level2
+    local ply = self:GetPlayerLevel()
+
+    return ply >= level1 and ply <= level2
 end
 
 
