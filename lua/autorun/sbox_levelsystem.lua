@@ -4,10 +4,15 @@ sbox_ls.config = {}
 sbox_ls.language = {}
 sbox_ls.db = "sbox_levelsystem"
 sbox_ls.dir = "sbox-levelsystem"
-sbox_ls.display_level = true
-sbox_ls.prefix = "[SBOX-LS]"
+sbox_ls.display_level = CreateConVar("sbox_ls_displaylevel", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Announce the level up of a player?")
+sbox_ls.prefix = CreateConVar("sbox_ls_prefix", "[SBOX-LS]", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Set the prefix of Sandbox Level System")
 sbox_ls.prefix_color = Color(91, 123, 227)
 
+
+------------------------
+----- Config Module ----
+------------------------
+sbox_ls.usecfg = CreateConVar("sbox_ls_config", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Use the config file instead of convars?")
 sbox_ls.var_blacklist = {
     ["var_blacklist"] = true,
     ["language"] = true,
@@ -20,6 +25,7 @@ sbox_ls.var_blacklist = {
 ------------ Language ------------
 ----------------------------------
 -- https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+
 sbox_ls.lang = {
     ["en"] = "english",
     ["es"] = "spanish",
@@ -52,12 +58,6 @@ addCV("sbox_ls_spawned_npc",     2, "The amount of xp to get when a player spawn
 addCV("sbox_ls_spawned_prop",    1, "The amount of xp to get when a player spawns a prop.")
 addCV("sbox_ls_spawned_sent",    2, "The amount of xp to get when a player spawns a SENT.")
 addCV("sbox_ls_spawned_ragdoll", 2, "The amount of xp to get when a player spawns a ragdoll.")
-
-------------------------
------ Config Module ----
-------------------------
-
-addCV("sbox_ls_config",          0, "Use the config file instead of convars?")
 
 ------------------------
 ---- Credits Module ----
@@ -135,17 +135,17 @@ sbox_ls.math_db = "math_points"
 ----------------------------------
 
 function SLS.mSV(...)
-    MsgC( Color(56, 228, 255, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), unpack({...}))
+    MsgC( Color(56, 228, 255, 200), string.Trim(sbox_ls.prefix:GetString()), " ", Color(184, 246, 255, 200), unpack({...}))
     MsgC("\n")
 end
 
 function SLS.mCL(...)
-    MsgC( Color(255, 235, 56, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), unpack({...}))
+    MsgC( Color(255, 235, 56, 200), string.Trim(sbox_ls.prefix:GetString()), " ", Color(184, 246, 255, 200), unpack({...}))
     MsgC("\n")
 end
 
 function SLS.mSH(...)
-    MsgC( Color(167, 255, 167, 200), string.Trim(sbox_ls.prefix), " ", Color(184, 246, 255, 200), unpack({...}))
+    MsgC( Color(167, 255, 167, 200), string.Trim(sbox_ls.prefix:GetString()), " ", Color(184, 246, 255, 200), unpack({...}))
     MsgC("\n")
 end
 
@@ -189,7 +189,7 @@ local function AddDir(dir)
 
     for _, v in ipairs(directories) do AddDir(dir .. v) end
 end
-AddDir("sbox-levelsystem")
+AddDir(sbox_ls.dir)
 
 print("\n- Made by vicentefelipechile and Lugent -")
 print("-----------------------------------------\n")

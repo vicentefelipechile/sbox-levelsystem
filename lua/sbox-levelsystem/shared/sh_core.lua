@@ -105,8 +105,8 @@ function SLS.getVar(xp_type)
 end
 
 function SLS.configVar(var)
-    if GetConVar("sbox_ls_config"):GetBool() then
-        return sbox_ls.config[var]
+    if ( #sbox_ls.config ~= 0 ) and GetConVar("sbox_ls_config"):GetBool() then
+        return sbox_ls.config[var] or 1
     end
 
     return GetConVar("sbox_ls_" .. var)

@@ -11,10 +11,8 @@ net.Receive("sandbox_levelsystem_config", function()
 end)
 
 net.Receive("sandbox_levelsystem_levelup", function()
-    local data = net.ReadTable()
+    local level = net.ReadUInt(16)
+    local name = net.ReadString()
 
-    local name = data.name
-    local level = data.lvl
-
-    chat.AddText(sbox_ls.prefix_color, sbox_ls.prefix, Color(255, 255, 255), " ", name, " ", SLS.GetLanguage("levelup"), " ", level)
+    chat.AddText(sbox_ls.prefix_color, sbox_ls.prefix:GetString(), Color(255, 255, 255), " ", name, " ", SLS.GetLanguage("levelup"), " ", level)
 end)

@@ -5,7 +5,7 @@
 function SLS.httpData()
 
     HTTP({
-        method      = "get",
+        method      = "GET",
         url         = "https://raw.githubusercontent.com/SuperCALIENTITO/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
         headers     = {},
 
@@ -102,7 +102,7 @@ function SLS.requestData()
     local tbl = {}
     
     while not dataConfig:EndOfFile() do
-        local line = tostring(dataConfig:ReadLine())
+        local line = Trim(dataConfig:ReadLine())
         local lineStart, lineEnd = Find(line, "=") 
     
         if string.StartWith(line, "#") then continue end
@@ -112,8 +112,7 @@ function SLS.requestData()
         if not lineStart then continue end
     
         if Find(line, "#") then
-            local a = Find(line, "#")
-            line = Sub(line, 0, a - 1)
+            line = Sub(line, 0, Find(line, "#") - 1)
         end
 
         line = Trim(line)

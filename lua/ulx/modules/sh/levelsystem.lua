@@ -1,7 +1,7 @@
 function ulx.addlevel( calling_ply, target, number )
 	local level = target:GetPlayerLevel() or target:GetNWInt("sbox_ls_level", 1)
 
-    target:SetPlayerLevel(number + level)
+    SLS.setPlayerLevel(target, number + level)
 
 	ulx.fancyLogAdmin( calling_ply, "#A add #s levels to #T", level, target )
 end
@@ -14,7 +14,8 @@ addlevel:help( "Add a level to an user" )
 
 
 function ulx.setlevel( calling_ply, target, number )
-    target:SetPlayerLevel(number)
+
+    SLS.setPlayerLevel(target, number)
 
 	ulx.fancyLogAdmin( calling_ply, "#A set level #s to #T", level, target )
 end
