@@ -1,7 +1,7 @@
-SLS = {}
-sbox_ls = {}
-sbox_ls.config = {}
-sbox_ls.language = {}
+SLS = SLS or {}
+sbox_ls = sbox_ls or {}
+sbox_ls.config = sbox_ls.config or {}
+sbox_ls.language = sbox_ls.language or {}
 sbox_ls.db = "sbox_levelsystem"
 sbox_ls.dir = "sbox-levelsystem"
 sbox_ls.display_level = CreateConVar("sbox_ls_displaylevel", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Announce the level up of a player?")
@@ -12,8 +12,8 @@ sbox_ls.prefix_color = Color(91, 123, 227)
 ------------------------
 ----- Config Module ----
 ------------------------
-sbox_ls.usecfg = CreateConVar("sbox_ls_config", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Use the config file instead of convars?")
-sbox_ls.var_blacklist = {
+sbox_ls.usecfg = sbox_ls.usecfg or CreateConVar("sbox_ls_config", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Use the config file instead of convars?")
+sbox_ls.var_blacklist = sbox_ls.var_blacklist or {
     ["var_blacklist"] = true,
     ["language"] = true,
     ["config"] = true,
@@ -29,7 +29,7 @@ sbox_ls.var_blacklist = {
 ----------------------------------
 -- https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 
-sbox_ls.lang = {
+sbox_ls.lang = sbox_ls.lang or {
     ["en"] = "english",
     ["es"] = "spanish",
 }

@@ -71,12 +71,17 @@ end
 -------- Data Read -------
 --------------------------
 
+local Trim = string.Trim
+local Find = string.find
+local Sub = string.sub
+local tN = tonumber
+
 local convert = {
     ["bool"] = function(v)
         return tobool(v)
     end,
     ["number"] = function(v)
-        return tonumber(v)
+        return tN(v)
     end,
     ["color"] = function(r,g,b)
         return Color(r,g,b)
@@ -100,9 +105,9 @@ function SLS.checkVal(val)
             return "invalid"
         end
 
-        rgb["r"] = R
-        rgb["g"] = G
-        rgb["b"] = B
+        rgb["r"] = tN(R)
+        rgb["g"] = tN(G)
+        rgb["b"] = tN(B)
         
 
         return "color", rgb
@@ -114,10 +119,6 @@ function SLS.checkVal(val)
 
     return "string"
 end
-
-local Trim = string.Trim
-local Find = string.find
-local Sub = string.sub
 
 function SLS.requestData()
     local dataConfig = file.Open(dir.."config.txt", "rb", "DATA")
