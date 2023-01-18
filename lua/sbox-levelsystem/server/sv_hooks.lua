@@ -2,8 +2,10 @@
 ----------- Connection -----------
 ----------------------------------
 hook.Add("PlayerInitialSpawn", "SboxLS_connection", function(ply)
+    SLS.updatePlayerName(ply)
     SLS.simpleAddXp(ply, "connections")
 end)
+
 ----------------------------------
 -------------- Kills -------------
 ----------------------------------

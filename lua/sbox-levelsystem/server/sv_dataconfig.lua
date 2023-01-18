@@ -6,7 +6,7 @@ function SLS.httpData()
 
     HTTP({
         method      = "GET",
-        url         = "https://raw.githubusercontent.com/SuperCALIENTITO/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
+        url         = "https://raw.githubusercontent.com/vicentefelipechile/sbox-levelsystem/main/data/sbox-levelsystem/config.txt",
         headers     = {},
 
         success     = function(response, body, headers)
@@ -71,24 +71,49 @@ end
 -------- Data Read -------
 --------------------------
 
-local function checkVal(val)
-    if ( val == false or val == "false" or val == true or val == "true" ) then
+local convert = {
+    ["bool"] = function(v)
+        return tobool(v)
+    end,
+    ["number"] = function(v)
+        return tonumber(v)
+    end,
+    ["color"] = function(r,g,b)
+        return Color(r,g,b)
+    end,
+    ["invalid"] = function()
+        return nil
+    end
+}
+
+function SLS.checkVal(val)
+    if val == ( "false" or "true" ) then
         return "bool"
     end
 
     if string.StartWith(val, "Color(") and string.EndsWith(val, ")") then
-        local tbl, rgb = {}, {}
-        for num in string.gmatch(val, "%d+") do table.insert(tbl, tonumber(num)) end
-        rgb.r = tbl[1] rgb.g = tbl[2] rgb.b = tbl[3]
+        local rgb = {}
+
+        local R,G,B = val:match("Color%((%d+) (%d+) (%d+)%)")
+
+        if not B then
+            return "invalid"
+        end
+
+        rgb["r"] = R
+        rgb["g"] = G
+        rgb["b"] = B
+        
+
         return "color", rgb
     end
 
-    if tonumber(val) then return "number" end
+    if tonumber(val) then
+        return "number"
+    end
 
     return "string"
 end
-
-SLS.checkVal = checkVal
 
 local Trim = string.Trim
 local Find = string.find
@@ -103,33 +128,24 @@ function SLS.requestData()
     
     while not dataConfig:EndOfFile() do
         local line = Trim(dataConfig:ReadLine())
-        local lineStart, lineEnd = Find(line, "=") 
     
         if string.StartWith(line, "#") then continue end
-    
+
+        local lineStart, lineEnd = Find(line, "=") 
         if line == "" then continue end
-    
         if not lineStart then continue end
     
         if Find(line, "#") then
-            line = Sub(line, 0, Find(line, "#") - 1)
+            line = Trim( Sub(line, 0, Find(line, "#") - 1) )
         end
-
-        line = Trim(line)
     
         local var, value = Trim( Sub(line, 0, lineEnd - 1) ), Trim( Sub(line, lineStart + 1) )
 
         if sbox_ls.var_blacklist[var] then continue end
 
-        local valType, rgb = checkVal(value)
+        local valType, rgb = SLS.checkVal(value)
 
-        if valType == "bool" then
-            value = tobool(value)
-        elseif valType == "number" then
-            value = tonumber(value)
-        elseif valType == "color" then
-            value = Color(rgb.r, rgb.g, rgb.b)
-        end
+        value = rgb and convert["color"](rgb.r, rgb.g, rgb.b) or convert[valType](value)
     
         tbl[var] = value
         sbox_ls.config[var] = value
