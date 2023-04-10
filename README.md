@@ -116,4 +116,4 @@ ply:IsPlayerLevelLessThan(level)
 # Mapping Latam
 
 - [Github](https://github.com/mapping-latam)
-- [Discord](https://github.com/mapping-latam)
+- [Discord](https://discord.gg/GKdJv9ZUMC)
